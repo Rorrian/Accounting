@@ -4,19 +4,46 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "devT": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@tanstack/react-query": "^5.56.2",
+    "@vanilla-extract/css": "^1.14.2",
+    "@vanilla-extract/dynamic": "^2.1.0",
+    "@vanilla-extract/recipes": "^0.5.2",
+    "axios": "^1.7.7",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.3.28",
+    "js-cookie": "^3.0.5",
+    "next": "14.2.5",
     "react": "^18",
+    "react-cookie": "^7.2.0",
     "react-dom": "^18",
-    "next": "14.2.5"
+    "react-google-recaptcha": "^3.1.0",
+    "react-hook-form": "^7.52.1",
+    "react-hot-toast": "^2.4.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@svgr/webpack": "^8.1.0",
+    "@tanstack/react-query-devtools": "^5.56.2",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "@vanilla-extract/next-plugin": "^2.4.0",
+    "autoprefixer": "^10.4.19",
+    "msw": "^2.5.1",
+    "sass": "^1.77.8",
+    "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
