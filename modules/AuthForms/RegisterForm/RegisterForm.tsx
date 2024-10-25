@@ -11,6 +11,7 @@ import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
 import { getErrorMessage } from "@/helpers/common"
 import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
+import { RegisterFormData } from "@/types/commonTypes"
 
 import { Form } from "../../../components/UI/Form/Form"
 import { validationRules } from "./validationRules"
@@ -32,7 +33,7 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 	const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 	const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
 
-	const handleFormSubmit = (data: any) => {
+	const handleFormSubmit = (data: RegisterFormData) => {
 		const { confirmPassword, ...submitData } = data;
 		onSubmit(submitData);
 	};

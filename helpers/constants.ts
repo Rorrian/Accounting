@@ -1,14 +1,11 @@
 export const API_URL = "http://localhost:4200/api"
-// FIXME: use?
-export const IS_CLIENT = typeof window !== 'undefined'
 
 export const MIN_SWIPE_FORCE = 10000
 
-// FIXME: удалить за ненадобностью?
 export const enum AuthTypes {
-	register = "register",
-	login = "login",
-	restorePassword = "restorePassword",
+	RestorePassword = "restore-password",
+	Login = "login",
+	Register = "register",
 }
 
 export const USERNAME_REGEXP = /^[a-zA-Z0-9_.-]+$/;
@@ -18,9 +15,9 @@ export const EMAIL_REGEXP =
   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=\S+$)/;
 
-export const MIN_USERNAME_LENGTH = 2
+export const MIN_USERNAME_LENGTH = 1
 export const MAX_USERNAME_LENGTH = 30
-export const MIN_PASSWORD_LENGTH = 8
+export const MIN_PASSWORD_LENGTH = 1
 export const MAX_PASSWORD_LENGTH = 20
 export const MAX_EMAIL_LENGTH = 254
 

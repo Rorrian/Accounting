@@ -25,7 +25,7 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
 
 	const forms = [
 		{
-			type: AuthTypes.restorePassword,
+			type: AuthTypes.RestorePassword,
 			component: (
 				<RestorePasswordForm
 					className={authFormStyles.form}
@@ -34,7 +34,7 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
 			),
 		},
 		{
-			type: AuthTypes.login,
+			type: AuthTypes.Login,
 			component: (
 				<LoginForm
 					className={authFormStyles.form}
@@ -44,7 +44,7 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
 			),
 		},
 		{
-			type: AuthTypes.register,
+			type: AuthTypes.Register,
 			component: (
 				<RegisterForm
 					className={authFormStyles.form}

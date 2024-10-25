@@ -1,14 +1,17 @@
 import clsx from "clsx";
+import { UseFormRegister } from "react-hook-form";
 
 import { registerFormStyles } from "@/modules/AuthForms/RegisterForm/RegisterForm.css";
+import { FieldValidationRule } from "@/types/commonTypes";
 
 import { TextField } from "../TextField/TextField";
+
 
 interface FormTextFieldProps {
   type: string;
   placeholder: string;
-  register: any;
-  validation: any;
+  register: UseFormRegister<any>;
+  validation: FieldValidationRule;
   errorMessage?: string | null;
   showPasswordToggle?: boolean;
   toggleVisibility?: () => void;

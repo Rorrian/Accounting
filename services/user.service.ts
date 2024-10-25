@@ -1,11 +1,11 @@
 import { axiosClassic } from '@/api/axios'
-import { IUser } from '@/types/commonTypes'
+import { User } from '@/types/commonTypes'
 
 class UserService {
 	private _BASE_URL = '/users'
 
 	async fetchProfile() {
-		return axiosClassic.get<IUser>(`${this._BASE_URL}/profile`)
+		return axiosClassic.get<User>(`${this._BASE_URL}/profile`)
 	}
 }
 

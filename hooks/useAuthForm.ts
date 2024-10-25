@@ -5,67 +5,80 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 import authService from '@/services/auth/auth.service'
+import { FormData, LoginFormData, RegisterFormData, RestorePasswordFormData } from '@/types/commonTypes'
+import { AuthTypes } from '@/helpers/constants'
+import { strict } from 'assert'
 
-// TODO: перенести в enum(AuthTypes)
-export function useAuthForm(type: 'password-reset' | 'login' | 'register') {
-	const { register, handleSubmit, reset, formState, watch } = useForm<any>()
+export function useAuthForm(type: AuthTypes) {
+	const { register, handleSubmit, reset, formState, watch } = useForm<FormData>()
 	const { errors } = formState 
 
 	const router = useRouter()
 
 	const { mutate: mutatePasswordReset, isPending: isPasswordResetPending } = useMutation({
-		mutationKey: ['password-reset'],
-		mutationFn: (data: any) => authService.main('password-reset', data),
+		mutationKey: [AuthTypes.RestorePassword],
+		mutationFn: (data: RestorePasswordFormData) => authService.main(AuthTypes.RestorePassword, data),
 		onSuccess() {
 			reset()
 			toast.success('Password reset email sent!')
-			// TODO: что-то еще?
 		},
 		onError(error) {
-			if (axios.isAxiosError(error)) {
-				console.log("ERROR !!!!!!!!!!!!!!!!!!");
-				console.log(error);
-				toast.error(error.response?.data?.message)
+			if (axios.isAxiosError(error)) { 
+				if(!!error.response?.data?.errors?.length) {
+					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
+					toast.error(`Error: ${errorMessages}`);
+				} else {
+					toast.error(`Error: ${error.response?.data?.message || 'Unknown error'}`);
+				}
 			}
 		}
 	})
 
 	const { mutate: mutateLogin, isPending: isLoginPending } = useMutation({
-		mutationKey: ['login'],
-		mutationFn: (data: any) => authService.main('login', data),
+		mutationKey: [AuthTypes.Login],
+		mutationFn: (data: LoginFormData) => authService.main(AuthTypes.Login, data),
 		onSuccess() {
 			reset()
 			router.push('/')
 		},
 		onError(error) {
-			if (axios.isAxiosError(error)) {
-				toast.error(error.response?.data?.message)
+			if (axios.isAxiosError(error)) { 
+				if(!!error.response?.data?.errors?.length) {
+					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
+					toast.error(`Error: ${errorMessages}`);
+				} else {
+					toast.error(`Error: ${error.response?.data?.message || 'Unknown error'}`);
+				}
 			}
 		}
 	})
 
 	const { mutate: mutateRegister, isPending: isRegisterPending } = useMutation({
-		mutationKey: ['register'],
-		mutationFn: (data: any) => authService.main('register', data),
+		mutationKey: [AuthTypes.Register],
+		mutationFn: (data: RegisterFormData) => authService.main(AuthTypes.Register, data),
 		onSuccess() {
 			reset()
 			router.push('/')
 		},
 		onError(error) {
-			if (axios.isAxiosError(error)) {
-				toast.error(error.response?.data?.message)
+			if (axios.isAxiosError(error)) { 
+				if(!!error.response?.data?.errors?.length) {
+					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
+					toast.error(`Errors:\n ${errorMessages}`);
+				} else {
+					toast.error(`Error:\n ${error.response?.data?.message || 'Unknown error'}`);
+				}
 			}
 		}
 	})
 
-	const onSubmit: SubmitHandler<any> = data => {
-		// if(type === AuthTypes.login) {
-			if(type === 'login') {
-			mutateLogin(data)
-		} else if(type === 'register') {
-			mutateRegister(data)
+	const onSubmit: SubmitHandler<FormData> = data => {
+			if(type === AuthTypes.Login) {
+			mutateLogin(data as LoginFormData)
+		} else if(type === AuthTypes.Register) {
+			mutateRegister(data as RegisterFormData)
 		 } else {
-			mutatePasswordReset(data)
+			mutatePasswordReset(data as RestorePasswordFormData)
 		 }
 	}
 

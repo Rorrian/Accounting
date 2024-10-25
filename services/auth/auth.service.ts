@@ -1,21 +1,21 @@
 import { axiosClassic } from '@/api/axios'
-import { IUser } from '@/types/commonTypes'
+import { FormData, User } from '@/types/commonTypes'
+import { AuthTypes } from '@/helpers/constants'
 
 import { saveTokenStorage } from './auth.helper'
 
-interface IAuthResponse {
+interface AuthResponse {
 	accessToken: string
-	user: IUser
+	user: User
 }
 
 class AuthService {
 	async main(
-		// TODO: перенести в enum(AuthTypes)
-		type: 'password-reset' | 'login' | 'register',
-		data: any,
+		type: AuthTypes,
+		data: FormData,
 		token?: string | null
 	) {
-		const response = await axiosClassic.post<IAuthResponse>(
+		const response = await axiosClassic.post<AuthResponse>(
 			`/auth/${type}`,
 			data,
 			{

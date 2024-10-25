@@ -71,11 +71,6 @@ export const LoginForm = ({
 					errorMessage={getErrorMessage(errors?.password)}
         />
 
-				{/* TODO: Вывод ошибок с бэка */}
-				{/* {errors.invalidCredentials && (
-          <p className="error">Invalid email or password</p>
-        )} */}
-
 				<Button
 					kind={Kind.Transparent}
 					size={Size.Small}
