@@ -4,8 +4,7 @@ import { AuthForms } from "@/modules/AuthForms/AuthForms"
 
 import { authStyles } from "./Auth.css"
 
-// TODO: Если авторизированный юзер сюда заходит, то его редиректит на главную
-export default function Auth() {
+export default function AuthPage() {
 	return (
 		<div className={authStyles.inner}>
 			<Logo className={authStyles.logo} />

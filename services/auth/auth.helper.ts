@@ -1,18 +1,20 @@
 import Cookies from 'js-cookie'
 
+import { EnumTokens } from '@/helpers/constants'
+
 export const getAccessToken = () => {
-	const accessToken = Cookies.get('accessToken')
+	const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN)
 	return accessToken || null
 }
 
 export const saveTokenStorage = (accessToken: string) => {
-	Cookies.set('accessToken', accessToken, {
+	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
 		domain: 'localhost',
 		sameSite: 'strict',
-		expires: 1
+		expires: 1,
 	})
 }
 
 export const removeFromStorage = () => {
-	Cookies.remove('accessToken')
+	Cookies.remove(EnumTokens.ACCESS_TOKEN)
 }

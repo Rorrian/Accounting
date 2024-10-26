@@ -37,8 +37,19 @@ const bottom = style(
 	"bottom"
 )
 
+const recaptcha = style(
+	{
+		marginTop: vars.spaces.sm,
+		marginBottom: vars.spaces.sm,
+		filter: 'grayscale(1)',
+		transform: 'scale(1.1)',
+	},
+	"recaptcha"
+)
+
 export const formStyles = {
 	form,
 	middle,
 	bottom,
+	recaptcha
 }

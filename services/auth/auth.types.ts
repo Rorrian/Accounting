@@ -5,11 +5,11 @@ export enum UserRole {
 	ADMIN = 'ADMIN'
 }
 
-export interface ITokenInside {
+export interface TokenInside {
 	id: number
 	rights: UserRole[]
 	iat: number
 	exp: number
 }
 
-export type TProtectUserData = Omit<ITokenInside, 'iat' | 'exp'>
+export type TProtectUserData = Omit<TokenInside, 'iat' | 'exp'>

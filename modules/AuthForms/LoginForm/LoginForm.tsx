@@ -2,6 +2,7 @@
 
 import { FormProvider, useForm } from "react-hook-form"
 import { useState } from "react"
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Button } from "@/components/UI/Button/Button"
 import { Title } from "@/components/UI/Title/Title"
@@ -27,7 +28,7 @@ export const LoginForm = ({
 	onSignUp,
 }: LoginFormProps) => {
 	const formMethods = useForm()
-	const { handleSubmit, isLoading, onSubmit, errors, register } = useAuthForm('login')
+	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register } = useAuthForm('login')
 
 	const signInWithGoogleHandler = () => {}
 
@@ -70,6 +71,14 @@ export const LoginForm = ({
 					toggleVisibility={togglePasswordVisibility}
 					errorMessage={getErrorMessage(errors?.password)}
         />
+
+				<ReCAPTCHA
+					ref={recaptchaRef}
+					size="normal"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					theme="light"
+					className={formStyles.recaptcha}
+				/>
 
 				<Button
 					kind={Kind.Transparent}

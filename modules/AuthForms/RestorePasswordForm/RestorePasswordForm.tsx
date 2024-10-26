@@ -1,6 +1,7 @@
 "use client"
 
 import { FormProvider, useForm } from "react-hook-form"
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { Button } from "@/components/UI/Button/Button"
 import { TextField } from "@/components/UI/InputBoxes/TextField/TextField"
@@ -9,10 +10,10 @@ import { formStyles } from "@/components/UI/Form/Form.css"
 import typographyCss from "@/theme/typography.css"
 import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
-
-import { Form } from "../../../components/UI/Form/Form"
 import { getErrorMessage } from "@/helpers/common"
 import { VALIDATION_MESSAGES } from "@/helpers/constants"
+
+import { Form } from "../../../components/UI/Form/Form"
 
 interface RestorePasswordFormProps {
 	className?: string
@@ -24,7 +25,7 @@ export const RestorePasswordForm = ({
 	onSignIn,
 }: RestorePasswordFormProps) => {
 	const formMethods = useForm()
-	const { handleSubmit, isLoading, onSubmit, errors, register } = useAuthForm('password-reset')
+	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register } = useAuthForm('password-reset')
 
 	return (
 		<FormProvider {...formMethods}>
@@ -43,6 +44,14 @@ export const RestorePasswordForm = ({
 					{...register('email', {
 						required: VALIDATION_MESSAGES.email.required,
 					 })}
+				/>
+			
+				<ReCAPTCHA
+					ref={recaptchaRef}
+					size="normal"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					theme="light"
+					className={formStyles.recaptcha}
 				/>
 
 				<Button

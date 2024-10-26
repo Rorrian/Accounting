@@ -8,6 +8,11 @@ export const enum AuthTypes {
 	Register = "register",
 }
 
+export enum EnumTokens {
+	'ACCESS_TOKEN' = 'accessToken',
+	'REFRESH_TOKEN' = 'refreshToken'
+}
+
 export const USERNAME_REGEXP = /^[a-zA-Z0-9_.-]+$/;
 // export const NAME_REGEXP = /^(?=.*[а-яА-Яa-zA-Z])[а-яА-Яa-zA-Z\s]+$/u;
 export const PHONE_REGEXP = /^\+7-9\d{2}-\d{3}-\d{2}-\d{2}$/;

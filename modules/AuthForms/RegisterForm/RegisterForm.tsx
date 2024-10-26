@@ -2,6 +2,7 @@
 
 import { FormProvider, useForm } from "react-hook-form"
 import { useState } from "react"
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { Button } from "@/components/UI/Button/Button"
 import { Title } from "@/components/UI/Title/Title"
@@ -24,7 +25,7 @@ interface RegisterFormProps {
 export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 	const formMethods = useForm()
 
-	const { handleSubmit, isLoading, onSubmit, errors, register, watch } = useAuthForm('register')
+	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register, watch } = useAuthForm('register')
 	const password = watch("password");
 	
 	const [showPassword, setShowPassword] = useState(false);
@@ -108,6 +109,14 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 					toggleVisibility={toggleConfirmPasswordVisibility}
 					errorMessage={getErrorMessage(errors?.confirmPassword)}
         />
+
+				<ReCAPTCHA
+					ref={recaptchaRef}
+					size="normal"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					theme="light"
+					className={formStyles.recaptcha}
+				/>
 
 				<Button
 					disabled={isLoading}
