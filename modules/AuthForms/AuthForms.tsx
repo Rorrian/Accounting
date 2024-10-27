@@ -10,8 +10,6 @@ import { RestorePasswordForm } from "./RestorePasswordForm/RestorePasswordForm"
 import { LoginForm } from "./LoginForm/LoginForm"
 import { RegisterForm } from "./RegisterForm/RegisterForm"
 
-// TODO: добавить рекапчу на каждую форму
-
 interface AuthFormsProps {
 	className?: string
 }
@@ -20,7 +18,7 @@ const DIRECTION_PREV = -1
 const DIRECTION_NEXT = 1
 
 export const AuthForms = ({ className }: AuthFormsProps) => {
-	const [currentFormIndex, setCurrentFormIndex] = useState(2)
+	const [currentFormIndex, setCurrentFormIndex] = useState(1)
 	const [direction, setDirection] = useState(0)
 
 	const forms = [

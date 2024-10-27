@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 import { useMutation } from "@tanstack/react-query"
+import Image from "next/image"
 
 import { useProfile } from "@/hooks/useProfile"
 import { PUBLIC_PAGES } from "@/config/pages/public.config"
@@ -35,22 +36,35 @@ export const ProfileInfo = () => {
 
 	return (
 		<div>
-			<h2>Привет, {user.name || 'Аноним'}</h2>
+			{user?.avatarPath && (
+				<Image
+					src={user.avatarPath}
+					alt="Avatar"
+					width={70}
+					height={70}
+				/>
+			)}
+			<h2>Hello, {user?.name || 'Anonymous'}</h2>
 			<br />
 
 			{user && (
 				<>
-					<p className="text-lg">Ваш email: {user.email} </p>
+					<p>
+						Your email: {user.email}
+						<i>
+							({user?.verificationToken ? 'Needs confirmation' : 'Confirmed'})
+						</i>
+					</p>
 					<br />
 					
-					<p>Права: {user.rights?.join(', ')}</p>
+					<p>Rights: {user.rights?.join(', ')}</p>
 					<br />
 
 					<button
 						onClick={() => mutateLogout()}
 						disabled={isLogoutLoading}
 					>
-						{isLogoutLoading ? 'Выходим...' : 'Выйти'}
+						{isLogoutLoading ? 'Logging out...' : 'Log out'}
 					</button>
 				</>
 			)}

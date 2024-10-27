@@ -1,13 +1,15 @@
 import { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { redirect } from "next/navigation"
+import { PropsWithChildren } from "react"
 
 import Providers from "@/providers/Providers"
 import { getServerAuth } from "@/helpers/server/get-server-auth"
 import { ADMIN_PAGES } from "@/config/pages/admin.config"
 import { PUBLIC_PAGES } from "@/config/pages/public.config"
 
-import { authStyles } from "./Auth.css"
+import { authStyles } from "./auth/Auth.css"
+
 import "../../styles/index.scss"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -19,13 +21,8 @@ export const metadata: Metadata = {
 
 export default async function AuthLayout({
 	children,
-}: Readonly<{
-	children: React.ReactNode
-}>) {
-	const user = await getServerAuth()
-
-	console.log(user);
-	
+}: PropsWithChildren<unknown>) {
+	const user = await getServerAuth()	
 
 	if (user?.isLoggedIn)
 		return redirect(user.isAdmin ? ADMIN_PAGES.HOME : PUBLIC_PAGES.HOME)

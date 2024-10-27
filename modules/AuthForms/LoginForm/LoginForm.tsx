@@ -7,32 +7,38 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { Button } from "@/components/UI/Button/Button"
 import { Title } from "@/components/UI/Title/Title"
 import { formStyles } from "@/components/UI/Form/Form.css"
-import typographyCss from "@/theme/typography.css"
 import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
-import { VALIDATION_MESSAGES } from "@/helpers/constants"
+import { AuthTypes, VALIDATION_MESSAGES } from "@/helpers/constants"
 import { getErrorMessage } from "@/helpers/common"
 import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
 
 import { Form } from "../../../components/UI/Form/Form"
+import { SocialMediaButtons } from "../SocialMediaButtons/SocialMediaButtons"
 
 interface LoginFormProps {
 	className?: string
-	onRestorePassword(): void
 	onSignUp(): void
+	onRestorePassword(): void
 }
 
 export const LoginForm = ({
 	className,
-	onRestorePassword,
 	onSignUp,
+	onRestorePassword,
 }: LoginFormProps) => {
 	const formMethods = useForm()
-	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register } = useAuthForm('login')
-
-	const signInWithGoogleHandler = () => {}
+	const {
+		errors,
+		handleSubmit,
+		isLoading,
+		recaptchaRef,
+		onSubmit,
+		register
+	} = useAuthForm(AuthTypes.Login)
 
 	const [showPassword, setShowPassword] = useState(false);
+
 	const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
 	return (
@@ -95,18 +101,11 @@ export const LoginForm = ({
 						type="submit"
 					/>
 
-					<p className={typographyCss.caption.regular}>or</p>
-
-					<Button
-						kind={Kind.Secondary}
-						size={Size.Small}
-						title="Sign in WIth Google"
-						onClick={signInWithGoogleHandler}
-					/>
+					<SocialMediaButtons />
 				</div>
 
 				<div className={formStyles.bottom}>
-					<p className={typographyCss.caption.regular}>
+					<p className={formStyles.caption}>
 						New to the BudgetBuddy?
 					</p>
 					<Button

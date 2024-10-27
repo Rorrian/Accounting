@@ -106,12 +106,12 @@ export function useAuthForm(type: AuthTypes) {
 	const isLoading = isPending || isLoginPending || isRegisterPending || isPasswordResetPending
 
 	return {
-		register,
-		handleSubmit,
-		onSubmit,
-		recaptchaRef,
 		errors,
+		handleSubmit,
 		isLoading,
+		recaptchaRef,
+		onSubmit,
+		register,
 		watch
 	}
 }

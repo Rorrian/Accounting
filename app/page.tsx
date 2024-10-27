@@ -24,7 +24,13 @@ export default function HomePage() {
 						<Link href={ADMIN_PAGES.HOME}><b>Admin</b></Link>
 					</li>
 					<li>
-						<Link href={PUBLIC_PAGES.DASHBOARD}>Dashboard</Link>
+						<Link href={PUBLIC_PAGES.PLANS}>Plans</Link>
+					</li>
+					<li>
+						<Link href={PUBLIC_PAGES.PREMIUM}>Premium</Link>
+					</li>
+					<li>
+						<Link href={PUBLIC_PAGES.PROFILE}>Profile</Link>
 					</li>
 				</ul>
 			</div>

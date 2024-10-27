@@ -1,11 +1,8 @@
 import { ProfileInfo } from "@/components/ProfileInfo/ProfileInfo";
-import { getServerAuth } from "@/helpers/server/get-server-auth";
-import { notFound } from "next/navigation";
+import { protectPage } from "@/helpers/server/protect-page";
 
 export default async function DashboardPage() {
-	const user = await getServerAuth()
-
-	if (!user?.isLoggedIn) return notFound()
+	await protectPage()
 
 	return (
 		<div>

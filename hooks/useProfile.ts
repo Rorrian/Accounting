@@ -30,9 +30,6 @@ export function useProfile() {
 
 	const profile = data?.data
 
-	console.log(`data ===`);
-	console.log(data);
-
 	const userState = profile ? transformUserToState(profile) : null
 
 	return {

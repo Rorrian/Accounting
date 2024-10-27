@@ -100,6 +100,7 @@ export const typographyObject = {
 			fontSize: "13px",
 			letterSpacing: "-0.02em",
 			textDecoration: "none",
+
 		},
 		medium: {
 			fontFamily: "Inter",

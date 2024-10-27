@@ -35,6 +35,7 @@ export const FormTextField = ({
       {...register(validation.name, validation.rules)}
     />
 
+		{/* TODO: Подправить отображение в темной теме */}
     {showPasswordToggle && (
       <button
         className={clsx(

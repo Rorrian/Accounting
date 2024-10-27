@@ -13,6 +13,7 @@ import { useAuthForm } from "@/hooks/useAuthForm"
 import { getErrorMessage } from "@/helpers/common"
 import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
 import { RegisterFormData } from "@/types/commonTypes"
+import { AuthTypes } from "@/helpers/constants"
 
 import { Form } from "../../../components/UI/Form/Form"
 import { validationRules } from "./validationRules"
@@ -25,7 +26,15 @@ interface RegisterFormProps {
 export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 	const formMethods = useForm()
 
-	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register, watch } = useAuthForm('register')
+	const {
+		errors,
+		handleSubmit,
+		isLoading,
+		recaptchaRef,
+		onSubmit,
+		register,
+		watch,
+	} = useAuthForm(AuthTypes.Register)
 	const password = watch("password");
 	
 	const [showPassword, setShowPassword] = useState(false);

@@ -1,6 +1,8 @@
 import { ComplexStyleRule, style } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
+import { vars } from "@/theme/theme.css"
+
 import { Size } from "./Logo"
 
 type LogoVariantsType = {
@@ -29,7 +31,9 @@ const icon = style(
 	{
 		width: "100%",
 		height: "auto",
-		color: "white",
+		color: vars.themeVariables.background.primary,
+		
+		transition: `color ${vars.transition}`,
 	},
 	"icon"
 )

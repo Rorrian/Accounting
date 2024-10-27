@@ -68,6 +68,7 @@ const themeVariables = createThemeContract({
 		auth: null,
 	},
 	textShadow: null,
+	filter: null,
 })
 
 export const lightTheme = createTheme(themeVariables, {
@@ -83,6 +84,7 @@ export const lightTheme = createTheme(themeVariables, {
 		auth: "url(/images/auth/authBg2.webp)",
 	},
 	textShadow: "1px 1px #fff, 2px 2px #777",
+	filter: '',
 })
 
 export const darkTheme = createTheme(themeVariables, {
@@ -98,6 +100,7 @@ export const darkTheme = createTheme(themeVariables, {
 		auth: "url(/images/auth/authBg1.webp)",
 	},
 	textShadow: "1px 1px #fff, 2px 2px #222",
+	filter: 'invert(1)',
 })
 
 export const vars = { ...root, themeVariables }

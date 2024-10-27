@@ -11,7 +11,7 @@ import typographyCss from "@/theme/typography.css"
 import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
 import { getErrorMessage } from "@/helpers/common"
-import { VALIDATION_MESSAGES } from "@/helpers/constants"
+import { AuthTypes, VALIDATION_MESSAGES } from "@/helpers/constants"
 
 import { Form } from "../../../components/UI/Form/Form"
 
@@ -20,12 +20,22 @@ interface RestorePasswordFormProps {
 	onSignIn(): void
 }
 
+	// TODO: восстановление пароля через письмо на почте
+	// TODO: форма для ввода нового пароля
+
 export const RestorePasswordForm = ({
 	className,
 	onSignIn,
 }: RestorePasswordFormProps) => {
 	const formMethods = useForm()
-	const { handleSubmit, isLoading, onSubmit, recaptchaRef, errors, register } = useAuthForm('password-reset')
+	const {
+		errors,
+		handleSubmit,
+		isLoading,
+		recaptchaRef,
+		onSubmit,
+		register
+	} = useAuthForm(AuthTypes.RestorePassword)
 
 	return (
 		<FormProvider {...formMethods}>
@@ -46,6 +56,7 @@ export const RestorePasswordForm = ({
 					 })}
 				/>
 			
+			{/* FIXME: нужна ли ? */}
 				<ReCAPTCHA
 					ref={recaptchaRef}
 					size="normal"

@@ -1,6 +1,8 @@
+import { style } from "@vanilla-extract/css"
+
 import { flexCentered, flexColumn, flexRow } from "@/styles/shared.css"
 import { vars } from "@/theme/theme.css"
-import { style } from "@vanilla-extract/css"
+import typographyCss from "@/theme/typography.css"
 
 const form = style(
 	[
@@ -41,15 +43,30 @@ const recaptcha = style(
 	{
 		marginTop: vars.spaces.sm,
 		marginBottom: vars.spaces.sm,
-		filter: 'grayscale(1)',
+		filter: `${vars.themeVariables.filter} grayscale(1)`,
 		transform: 'scale(1.1)',
+		
+		// TODO: Решить проблему с разницей transition
+		transition: `filter ${vars.transition}`,
 	},
 	"recaptcha"
+)
+
+const caption = style(
+	[
+		typographyCss.caption.regular,
+		{
+			color: vars.themeVariables.content.primary,
+			transition: `color ${vars.transition}`,
+		},
+	],
+	"caption"
 )
 
 export const formStyles = {
 	form,
 	middle,
 	bottom,
-	recaptcha
+	recaptcha,
+	caption
 }
