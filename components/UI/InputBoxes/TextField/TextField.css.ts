@@ -1,5 +1,6 @@
-import { vars } from "@/theme/theme.css"
 import { style } from "@vanilla-extract/css"
+
+import { vars } from "@/theme/theme.css"
 
 const wrapper = style(
 	{
@@ -32,7 +33,6 @@ const input = style(
 
 		transition: `color ${vars.transition}`,
 	},
-
 	"input"
 )
 
@@ -40,7 +40,6 @@ const invalidInput = style(
 	{
 		border: `1px solid ${vars.content.error}`,
 	},
-
 	"invalidInput"
 )
 
@@ -49,11 +48,11 @@ const errorText = style(
 		position: 'absolute',
 		bottom: '-16px',
 		left: 0,
+		
 		fontSize: "0.65em",
 
 		color: vars.content.error,
 	},
-
 	"errorText"
 )
 

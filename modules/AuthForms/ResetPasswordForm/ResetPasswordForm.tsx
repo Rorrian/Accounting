@@ -1,32 +1,32 @@
 "use client"
 
-import { FormProvider, useForm } from "react-hook-form"
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import ReCAPTCHA from "react-google-recaptcha"
 
 import { Button } from "@/components/UI/Button/Button"
-import { TextField } from "@/components/UI/InputBoxes/TextField/TextField"
 import { Title } from "@/components/UI/Title/Title"
 import { formStyles } from "@/components/UI/Form/Form.css"
-import typographyCss from "@/theme/typography.css"
 import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
 import { getErrorMessage } from "@/helpers/common"
-import { AuthTypes, VALIDATION_MESSAGES } from "@/helpers/constants"
+import { AuthTypes } from "@/helpers/constants"
+import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
+import { FormData, ResetPasswordFormData } from "@/types/commonTypes"
 
 import { Form } from "../../../components/UI/Form/Form"
+import { validationRules } from "../RegisterForm/validationRules"
 
-interface RestorePasswordFormProps {
+// FIXME: При отсутствии в базе пользователя с введенной почтой можно предлагать зарегистрироваться ?
+
+interface ResetPasswordFormProps {
 	className?: string
 	onSignIn(): void
 }
 
-	// TODO: восстановление пароля через письмо на почте
-	// TODO: форма для ввода нового пароля
-
-export const RestorePasswordForm = ({
+export const ResetPasswordForm = ({
 	className,
 	onSignIn,
-}: RestorePasswordFormProps) => {
+}: ResetPasswordFormProps) => {
 	const formMethods = useForm()
 	const {
 		errors,
@@ -35,34 +35,40 @@ export const RestorePasswordForm = ({
 		recaptchaRef,
 		onSubmit,
 		register
-	} = useAuthForm(AuthTypes.RestorePassword)
+	} = useAuthForm<ResetPasswordFormData>(AuthTypes.ResetPassword)
+
+	const handleFormSubmit: SubmitHandler<FormData> = data => {
+		onSubmit(data as ResetPasswordFormData)
+	};
+
+	const { maxLength, ...emailValidationRules } = validationRules.email;
 
 	return (
 		<FormProvider {...formMethods}>
 			<Form
 				className={className}
-				id="restorePasswordForm"
-				onSubmit={handleSubmit(onSubmit)}
+				id="resetPasswordForm"
+				onSubmit={handleSubmit(handleFormSubmit)}
 			>
 				<Title headingType="h2">Restore password</Title>
 
-				<TextField
+				<FormTextField
 					errorMessage={getErrorMessage(errors?.email)}
-					isValid={!errors.email}
 					type="email"
 					placeholder="Email Address"
-					{...register('email', {
-						required: VALIDATION_MESSAGES.email.required,
-					 })}
+					register={register}
+					validation={{
+						name: 'email',
+						rules: emailValidationRules,
+					}}
 				/>
 			
-			{/* FIXME: нужна ли ? */}
 				<ReCAPTCHA
 					ref={recaptchaRef}
-					size="normal"
-					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-					theme="light"
 					className={formStyles.recaptcha}
+					hl="en"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					size="normal"
 				/>
 
 				<Button
@@ -73,7 +79,7 @@ export const RestorePasswordForm = ({
 				/>
 
 				<div className={formStyles.bottom}>
-					<p className={typographyCss.caption.regular}>
+					<p className={formStyles.caption}>
 						Remember your password?
 					</p>
 					<Button

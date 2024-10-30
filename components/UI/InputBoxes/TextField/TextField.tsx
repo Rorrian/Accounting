@@ -7,8 +7,8 @@ import { inputStyles } from "./TextField.css"
 
 interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	caption?: string
-	counter?: InputCounter
 	className?: string
+	counter?: InputCounter
 	errorMessage?: string | null
 	isValid?: boolean
 	label?: string | React.ReactNode
@@ -16,14 +16,13 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	type?: string
 	value?: string
 }
-// TODO: Валидация данных в соответствии с типом
 
 export const TextField = forwardRef(
 	(
 		{
 			caption,
-			counter,
 			className,
+			counter,
 			errorMessage,
 			isValid,
 			label,

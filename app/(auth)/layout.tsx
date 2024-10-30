@@ -8,7 +8,7 @@ import { getServerAuth } from "@/helpers/server/get-server-auth"
 import { ADMIN_PAGES } from "@/config/pages/admin.config"
 import { PUBLIC_PAGES } from "@/config/pages/public.config"
 
-import { authStyles } from "./auth/Auth.css"
+import { authStyles } from "./auth/AuthPage.css"
 
 import "../../styles/index.scss"
 

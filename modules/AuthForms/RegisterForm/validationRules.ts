@@ -1,5 +1,3 @@
-// src/components/RegistrationForm/validationRules.ts
-
 import { 
   EMAIL_REGEXP, 
   MAX_EMAIL_LENGTH, 
@@ -52,9 +50,5 @@ export const validationRules = {
   confirmPassword: {
     required: VALIDATION_MESSAGES.confirmPassword.required,
     validate: (value: string, { password }: { password: string }) => value === password || VALIDATION_MESSAGES.confirmPassword.mismatch,
-    minLength: {
-      value: MIN_PASSWORD_LENGTH,
-      message: VALIDATION_MESSAGES.confirmPassword.minLength,
-    },
   },
 };

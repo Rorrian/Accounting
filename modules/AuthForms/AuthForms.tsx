@@ -6,7 +6,7 @@ import { useState } from "react"
 import { AuthTypes, MIN_SWIPE_FORCE } from "@/helpers/constants"
 
 import { authFormStyles } from "./AuthForms.css"
-import { RestorePasswordForm } from "./RestorePasswordForm/RestorePasswordForm"
+import { ResetPasswordForm } from "./ResetPasswordForm/ResetPasswordForm"
 import { LoginForm } from "./LoginForm/LoginForm"
 import { RegisterForm } from "./RegisterForm/RegisterForm"
 
@@ -23,9 +23,9 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
 
 	const forms = [
 		{
-			type: AuthTypes.RestorePassword,
+			type: AuthTypes.ResetPassword,
 			component: (
-				<RestorePasswordForm
+				<ResetPasswordForm
 					className={authFormStyles.form}
 					onSignIn={() => switchForm(DIRECTION_NEXT)}
 				/>
@@ -36,7 +36,7 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
 			component: (
 				<LoginForm
 					className={authFormStyles.form}
-					onRestorePassword={() => switchForm(DIRECTION_PREV)}
+					onResetPassword={() => switchForm(DIRECTION_PREV)}
 					onSignUp={() => switchForm(DIRECTION_NEXT)}
 				/>
 			),

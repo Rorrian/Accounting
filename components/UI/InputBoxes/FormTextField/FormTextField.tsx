@@ -8,34 +8,33 @@ import { TextField } from "../TextField/TextField";
 
 
 interface FormTextFieldProps {
+  errorMessage?: string | null;
   type: string;
   placeholder: string;
   register: UseFormRegister<any>;
-  validation: FieldValidationRule;
-  errorMessage?: string | null;
   showPasswordToggle?: boolean;
+  validation: FieldValidationRule;
   toggleVisibility?: () => void;
 }
 
 export const FormTextField = ({
-  type,
+  errorMessage,
   placeholder,
   register,
-  validation,
-  errorMessage,
   showPasswordToggle,
+  type,
+  validation,
   toggleVisibility,
 }: FormTextFieldProps) => (
   <div className={registerFormStyles.passwordWrapper}>
     <TextField
       errorMessage={errorMessage}
       isValid={!errorMessage}
-      type={type}
       placeholder={placeholder}
+      type={type}
       {...register(validation.name, validation.rules)}
     />
 
-		{/* TODO: Подправить отображение в темной теме */}
     {showPasswordToggle && (
       <button
         className={clsx(

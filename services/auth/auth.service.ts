@@ -6,6 +6,7 @@ import { removeFromStorage, saveTokenStorage } from './auth.helper'
 
 interface AuthResponse {
 	accessToken: string
+	isValid?: boolean
 	user: User
 }
 
@@ -13,7 +14,7 @@ class AuthService {
 	async main(
 		type: AuthTypes,
 		data: FormData,
-		token?: string | null
+		token?: string | null,
 	) {
 		const response = await axiosClassic.post<AuthResponse>(
 			`/auth/${type}`,
@@ -50,6 +51,19 @@ class AuthService {
 				}
 			}
 		)
+
+		return response.data
+	}
+
+	async checkResetToken(token?: string) {
+		const response = await axiosClassic.post<AuthResponse>(
+			'/auth/change-password/checkResetToken',
+			{ token },
+		)
+
+		if (!response?.data) {
+			throw new Error('Invalid token');
+		}
 
 		return response.data
 	}

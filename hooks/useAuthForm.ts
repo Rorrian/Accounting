@@ -1,45 +1,68 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { FieldErrors, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useRef, useTransition } from 'react'
 
 import authService from '@/services/auth/auth.service'
-import { FormData, LoginFormData, RegisterFormData, RestorePasswordFormData } from '@/types/commonTypes'
-import { AuthTypes } from '@/helpers/constants'
+import {
+	ChangePasswordFormData,
+	FormData,
+	LoginFormData,
+	RegisterFormData,
+	ResetPasswordFormData
+} from '@/types/commonTypes'
+import { AuthTypes, EnumTokens } from '@/helpers/constants'
 import { PUBLIC_PAGES } from '@/config/pages/public.config'
+import { removeFromStorage } from '@/services/auth/auth.helper'
 
-export function useAuthForm(type: AuthTypes) {
+export function useAuthForm<T extends FormData>(type: AuthTypes) {
 	const { register, handleSubmit, reset, formState, watch } = useForm<FormData>()
-	const { errors } = formState 
+	const { errors } = formState as { errors: FieldErrors<T> }
 
 	const router = useRouter()
 	const [isPending, startTransition] = useTransition()
 
 	const recaptchaRef = useRef<ReCAPTCHA>(null)
 
-	const { mutate: mutatePasswordReset, isPending: isPasswordResetPending } = useMutation({
-		mutationKey: [AuthTypes.RestorePassword],
-		mutationFn: (data: RestorePasswordFormData) =>
-			authService.main(AuthTypes.RestorePassword, data, recaptchaRef?.current?.getValue()),
+	const handleError = (error: any) => {
+		if (axios.isAxiosError(error)) { 
+			if (error.response?.data?.errors?.length) {
+				const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
+				toast.error(`Errors:\n ${errorMessages}`);
+			} else {
+				toast.error(`Error:\n ${error.response?.data?.message || 'Unknown error'}`);
+			}
+		}
+	}
+
+	const { mutate: mutateResetPassword, isPending: isResetPasswordPending } = useMutation({
+		mutationKey: [AuthTypes.ResetPassword],
+		mutationFn: (data: ResetPasswordFormData) =>
+			authService.main(AuthTypes.ResetPassword, data, data.recaptcha),
 		onSuccess() {
 			startTransition(() => {
 				reset()
 				toast.success('Password reset email sent!')
 			})
 		},
-		onError(error) {
-			if (axios.isAxiosError(error)) { 
-				if(!!error.response?.data?.errors?.length) {
-					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
-					toast.error(`Errors:\n ${errorMessages}`);
-				} else {
-					toast.error(`Error:\n ${error.response?.data?.message || 'Unknown error'}`);
-				}
-			}
-		}
+		onError: handleError,
+	})
+
+	const { mutate: mutateChangePassword, isPending: isChangePasswordPending } = useMutation({
+		mutationKey: [AuthTypes.ChangePassword],
+		mutationFn: (data: ChangePasswordFormData) =>
+			authService.main(AuthTypes.ChangePassword, data),
+		onSuccess() {
+			startTransition(() => {
+				reset()
+				removeFromStorage(EnumTokens.RESET_TOKEN)
+				router.push(PUBLIC_PAGES.AUTH)
+			})
+		},
+		onError: handleError,
 	})
 
 	const { mutate: mutateLogin, isPending: isLoginPending } = useMutation({
@@ -52,16 +75,7 @@ export function useAuthForm(type: AuthTypes) {
 				router.push(PUBLIC_PAGES.HOME)
 			})
 		},
-		onError(error) {
-			if (axios.isAxiosError(error)) { 
-				if(!!error.response?.data?.errors?.length) {
-					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
-					toast.error(`Errors:\n ${errorMessages}`);
-				} else {
-					toast.error(`Error:\n ${error.response?.data?.message || 'Unknown error'}`);
-				}
-			}
-		}
+		onError: handleError,
 	})
 
 	const { mutate: mutateRegister, isPending: isRegisterPending } = useMutation({
@@ -74,22 +88,13 @@ export function useAuthForm(type: AuthTypes) {
 				router.push(PUBLIC_PAGES.HOME)
 			})
 		},
-		onError(error) {
-			if (axios.isAxiosError(error)) { 
-				if(!!error.response?.data?.errors?.length) {
-					const errorMessages = error.response.data.errors.map((errorItem: { message: string }) => errorItem.message).join('\n');
-					toast.error(`Errors:\n ${errorMessages}`);
-				} else {
-					toast.error(`Error:\n ${error.response?.data?.message || 'Unknown error'}`);
-				}
-			}
-		}
-	})
+		onError: handleError,
+	})	
 
-	const onSubmit: SubmitHandler<FormData> = data => {
-		const token = recaptchaRef?.current?.getValue()
+	const onSubmit = (data: FormData) => {
+		const recaptchaValue = recaptchaRef?.current?.getValue()
 
-		if (!token) {
+		if (!recaptchaValue && type !== AuthTypes.ChangePassword) {
 			toast.error('Pass the captcha!')
 			return
 		}
@@ -98,18 +103,20 @@ export function useAuthForm(type: AuthTypes) {
 			mutateLogin(data as LoginFormData)
 		} else if(type === AuthTypes.Register) {
 			mutateRegister(data as RegisterFormData)
-		 } else {
-			mutatePasswordReset(data as RestorePasswordFormData)
-		 }
+		}	else if(type === AuthTypes.ChangePassword) {
+			mutateChangePassword(data as ChangePasswordFormData)
+		} else {
+			mutateResetPassword({ ...data, recaptcha: recaptchaValue } as ResetPasswordFormData);
+		}
 	}
 
-	const isLoading = isPending || isLoginPending || isRegisterPending || isPasswordResetPending
+	const isLoading = isPending || isLoginPending || isRegisterPending || isResetPasswordPending || isChangePasswordPending
 
 	return {
 		errors,
-		handleSubmit,
 		isLoading,
 		recaptchaRef,
+		handleSubmit,
 		onSubmit,
 		register,
 		watch

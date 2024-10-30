@@ -10,6 +10,8 @@ const root = createGlobalTheme(":root", {
 		white: "#ffffff",
 		lightGrey: "#b3b3b3",
 
+		link: "#f78838",
+
 		disabled: "#b5b0b0",
 		error: "#ff0700",
 	},

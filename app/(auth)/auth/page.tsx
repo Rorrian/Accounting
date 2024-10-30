@@ -2,7 +2,7 @@ import { Logo } from "@/components/Logo/Logo"
 import { ToggleThemeBtn } from "@/components/ToggleThemeBtn/ToggleThemeBtn"
 import { AuthForms } from "@/modules/AuthForms/AuthForms"
 
-import { authStyles } from "./Auth.css"
+import { authStyles } from "./AuthPage.css"
 
 export default function AuthPage() {
 	return (

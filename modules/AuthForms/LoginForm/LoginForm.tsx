@@ -12,20 +12,21 @@ import { useAuthForm } from "@/hooks/useAuthForm"
 import { AuthTypes, VALIDATION_MESSAGES } from "@/helpers/constants"
 import { getErrorMessage } from "@/helpers/common"
 import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
+import { LoginFormData } from "@/types/commonTypes"
 
 import { Form } from "../../../components/UI/Form/Form"
 import { SocialMediaButtons } from "../SocialMediaButtons/SocialMediaButtons"
 
 interface LoginFormProps {
 	className?: string
+	onResetPassword(): void
 	onSignUp(): void
-	onRestorePassword(): void
 }
 
 export const LoginForm = ({
 	className,
+	onResetPassword,
 	onSignUp,
-	onRestorePassword,
 }: LoginFormProps) => {
 	const formMethods = useForm()
 	const {
@@ -35,7 +36,7 @@ export const LoginForm = ({
 		recaptchaRef,
 		onSubmit,
 		register
-	} = useAuthForm(AuthTypes.Login)
+	} = useAuthForm<LoginFormData>(AuthTypes.Login)
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -51,6 +52,7 @@ export const LoginForm = ({
 				<Title headingType="h2">Sign in</Title>
 
 				<FormTextField
+          errorMessage={getErrorMessage(errors?.email)}
           type="email"
           placeholder="Email Address"
           register={register}
@@ -60,37 +62,36 @@ export const LoginForm = ({
 							required: VALIDATION_MESSAGES.email.required
 						}
 					}}
-          errorMessage={getErrorMessage(errors?.email)}
         />
 
         <FormTextField
-          placeholder="Password"
+					errorMessage={getErrorMessage(errors?.password)}
           type={showPassword ? "text" : "password"}
+          placeholder="Password"
           register={register}
+					showPasswordToggle
           validation={{
 						name: 'password',
 						rules: {
 							required: VALIDATION_MESSAGES.password.required
 						}
 					}}
-					showPasswordToggle
 					toggleVisibility={togglePasswordVisibility}
-					errorMessage={getErrorMessage(errors?.password)}
         />
 
 				<ReCAPTCHA
 					ref={recaptchaRef}
-					size="normal"
-					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-					theme="light"
 					className={formStyles.recaptcha}
+					hl="en"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					size="normal"
 				/>
 
 				<Button
 					kind={Kind.Transparent}
 					size={Size.Small}
 					title="Forgot password?"
-					onClick={() => onRestorePassword()}
+					onClick={() => onResetPassword()}
 				/>
 
 				<div className={formStyles.middle}>

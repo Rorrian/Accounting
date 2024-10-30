@@ -1,11 +1,10 @@
 import { cookies } from 'next/headers'
 
-import { API_URL } from '@/helpers/constants'
-import { EnumTokens } from '@/services/auth/auth.service'
+import { API_URL, EnumTokens } from '@/helpers/constants'
 import { User } from '@/types/commonTypes'
 import { ProfileInfo } from '@/components/ProfileInfo/ProfileInfo'
 
-// TODO: удалить
+// Серверный подход
 const fetchProfile = async () => {
 	'use server'
 

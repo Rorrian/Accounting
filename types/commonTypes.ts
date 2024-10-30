@@ -1,16 +1,24 @@
+import { RegisterOptions } from "react-hook-form"
+
 import { UserRole } from "@/services/auth/auth.types"
 
 export interface User {
+	avatarPath?: string
+	email: string
 	id: number
 	name?: string
-	email: string
-	avatarPath?: string
-	verificationToken?: string
 	rights: UserRole[]
+	verificationToken?: string
 }
 
-export interface RestorePasswordFormData {
+export interface ResetPasswordFormData {
 	email: string
+	recaptcha?: string | null
+}
+export interface ChangePasswordFormData {
+	confirmPassword?: string
+	password: string
+	resetToken?: string
 }
 export interface LoginFormData extends Pick<User, 'email'> {
 	password: string
@@ -19,16 +27,13 @@ export interface RegisterFormData extends LoginFormData, Pick<User, 'name'> {
 	confirmPassword: string
 }
 
-export interface FormData {
-	name?: string
-	email: string
-	password?: string
-	confirmPassword?: string
-}
+export type FormData = 
+    | ChangePasswordFormData
+    | LoginFormData
+    | RegisterFormData
+    | ResetPasswordFormData
 
 export interface FieldValidationRule {
-	name: string;
-  rules: {
-		required: string;
-  }
+	name: string
+	rules?: RegisterOptions<any, string>
 }

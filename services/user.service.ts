@@ -12,10 +12,6 @@ class UserService {
 		return instance.get<{ text: string }>(`${this._BASE_URL}/premium`)
 	}
 
-	async fetchManagerContent() {
-		return instance.get<{ text: string }>(`${this._BASE_URL}/manager`)
-	}
-
 	async fetchList() {
 		return instance.get<User[]>(`${this._BASE_URL}/list`)
 	}

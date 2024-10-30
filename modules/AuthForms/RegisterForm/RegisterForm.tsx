@@ -1,19 +1,20 @@
 "use client"
 
-import { FormProvider, useForm } from "react-hook-form"
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { useState } from "react"
 import ReCAPTCHA from "react-google-recaptcha"
+import Link from "next/link"
 
 import { Button } from "@/components/UI/Button/Button"
 import { Title } from "@/components/UI/Title/Title"
 import { formStyles } from "@/components/UI/Form/Form.css"
-import typographyCss from "@/theme/typography.css"
 import { Kind, Size } from "@/types/components/button/enums"
 import { useAuthForm } from "@/hooks/useAuthForm"
 import { getErrorMessage } from "@/helpers/common"
 import { FormTextField } from "@/components/UI/InputBoxes/FormTextField/FormTextField"
-import { RegisterFormData } from "@/types/commonTypes"
+import { FormData, RegisterFormData } from "@/types/commonTypes"
 import { AuthTypes } from "@/helpers/constants"
+import { PUBLIC_PAGES } from "@/config/pages/public.config"
 
 import { Form } from "../../../components/UI/Form/Form"
 import { validationRules } from "./validationRules"
@@ -25,7 +26,6 @@ interface RegisterFormProps {
 
 export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 	const formMethods = useForm()
-
 	const {
 		errors,
 		handleSubmit,
@@ -34,17 +34,14 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 		onSubmit,
 		register,
 		watch,
-	} = useAuthForm(AuthTypes.Register)
+	} = useAuthForm<RegisterFormData>(AuthTypes.Register)
 	const password = watch("password");
-	
-	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-	const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
-	const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
+	const [showPasswords, setShowPasswords] = useState(false);
+	const togglePasswordsVisibility = () => setShowPasswords((prev) => !prev);
 
-	const handleFormSubmit = (data: RegisterFormData) => {
-		const { confirmPassword, ...submitData } = data;
+	const handleFormSubmit: SubmitHandler<FormData> = data => {
+		const { confirmPassword, ...submitData } = data as RegisterFormData;
 		onSubmit(submitData);
 	};
 
@@ -56,9 +53,10 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 				onSubmit={handleSubmit(handleFormSubmit)}
 			>
 				<Title headingType="h2">Sign up</Title>
-				<p className={typographyCss.caption.regular}>Welcome to BudgetBuddy!</p>
+					<p className={formStyles.caption}>Welcome to BudgetBuddy!</p>
 
 				<FormTextField
+          errorMessage={getErrorMessage(errors?.name)}
           type="text"
           placeholder="Username"
           register={register}
@@ -66,65 +64,54 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 						name: 'name',
 						rules: validationRules.username
 					}}
-          errorMessage={getErrorMessage(errors?.name)}
         />
 
 				<FormTextField
+          errorMessage={getErrorMessage(errors?.email)}
           type="email"
           placeholder="Email Address"
           register={register}
           validation={{
-						name: 'email', rules:
-						validationRules.email
+						name: 'email',
+						rules: validationRules.email
 					}}
-          errorMessage={getErrorMessage(errors?.email)}
         />
 
         <FormTextField
+					errorMessage={getErrorMessage(errors?.password)}
+          type={showPasswords ? "text" : "password"}
           placeholder="Create Password"
-          type={showPassword ? "text" : "password"}
           register={register}
+          showPasswordToggle
           validation={{
 						name: 'password',
 						rules: validationRules.password
 					}}
-          showPasswordToggle
-          toggleVisibility={togglePasswordVisibility}
-					errorMessage={getErrorMessage(errors?.password)}
-					/>
+          toggleVisibility={togglePasswordsVisibility}
+				/>
 
         <FormTextField
+					errorMessage={getErrorMessage(errors?.confirmPassword)}
+          type={showPasswords ? "text" : "password"}
           placeholder="Confirm Password"
-          type={showConfirmPassword ? "text" : "password"}
           register={register}
           validation={{
 						name: 'confirmPassword',
 						rules: validationRules.confirmPassword
 					}}
-					// Текущая реализация выше работает верно(и без watch), но следующая(с watch) более наглядая
-					// validation={{
-						// 	name: 'confirmPassword',
-						// 	rules: {
-							// 		required: VALIDATION_MESSAGES.confirmPassword.required,
-							// 		validate: (value: string) =>
-							// 			value === password || VALIDATION_MESSAGES.confirmPassword.mismatch,
-							// 		minLength: {
-								// 			value: MIN_PASSWORD_LENGTH,
-								// 			message: VALIDATION_MESSAGES.confirmPassword.minLength,
-								// 		},
-								// 	}
-						// }}
-					showPasswordToggle
-					toggleVisibility={toggleConfirmPasswordVisibility}
-					errorMessage={getErrorMessage(errors?.confirmPassword)}
+					toggleVisibility={togglePasswordsVisibility}
         />
+
+				<p className={formStyles.caption}>
+					By continuing, you agree to the <Link href={PUBLIC_PAGES.AGREEMENTS} className={formStyles.link}>BudgetBuddy Account Agreement</Link>
+				</p>
 
 				<ReCAPTCHA
 					ref={recaptchaRef}
-					size="normal"
-					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-					theme="light"
 					className={formStyles.recaptcha}
+					hl="en"
+					sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+					size="normal"
 				/>
 
 				<Button
@@ -135,7 +122,7 @@ export const RegisterForm = ({ className, onSignIn }: RegisterFormProps) => {
 				/>
 
 				<div className={formStyles.bottom}>
-					<p className={typographyCss.caption.regular}>Already have account?</p>
+					<p className={formStyles.caption}>Already have account?</p>
 					<Button
 						kind={Kind.Secondary}
 						size={Size.Small}

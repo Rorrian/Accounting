@@ -63,10 +63,18 @@ const caption = style(
 	"caption"
 )
 
+const link = style(
+	{
+		color: vars.content.link,
+	},
+	"link"
+)
+
 export const formStyles = {
 	form,
 	middle,
 	bottom,
 	recaptcha,
-	caption
+	caption,
+	link,
 }

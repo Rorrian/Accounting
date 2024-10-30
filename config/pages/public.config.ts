@@ -1,10 +1,11 @@
 class PublicPages {
-	HOME = '/'
+	AGREEMENTS = '/agreements'
 	AUTH = '/auth'
 	DASHBOARD = '/dashboard'
+	HOME = '/'
 	PLANS = '/plans'
-	PROFILE = '/profile'
 	PREMIUM = '/premium'
+	PROFILE = '/profile'
 }
 
 export const PUBLIC_PAGES = new PublicPages()

@@ -37,3 +37,11 @@ export const flexCentered = style(
 	},
 	"flexCentered"
 )
+
+
+export const marginAuto = style(
+	{
+		margin: "auto",
+	},
+	"marginAuto"
+)
