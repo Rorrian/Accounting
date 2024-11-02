@@ -1,22 +1,22 @@
-"use client"
+'use client'
 
-import clsx from "clsx"
+import clsx from 'clsx'
 
-import { useThemeStore } from "@/store"
-import { darkTheme, lightTheme } from "@/theme/theme.css"
+import { useThemeStore } from '@/store'
+import { darkTheme, lightTheme } from '@/theme/theme.css'
 
 export default function ThemeProvider({
-	className,
-	children,
+  className,
+  children,
 }: {
-	className?: string
-	children: React.ReactNode
+  className?: string
+  children: React.ReactNode
 }) {
-	const isDarkMode = useThemeStore(state => state.isDarkMode)
+  const isDarkMode = useThemeStore(state => state.isDarkMode)
 
-	return (
-		<div className={clsx(className, isDarkMode ? darkTheme : lightTheme)}>
-			{children}
-		</div>
-	)
+  return (
+    <div className={clsx(className, isDarkMode ? darkTheme : lightTheme)}>
+      {children}
+    </div>
+  )
 }

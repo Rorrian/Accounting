@@ -1,13 +1,13 @@
-import { 
-  EMAIL_REGEXP, 
-  MAX_EMAIL_LENGTH, 
-  MAX_PASSWORD_LENGTH, 
-  MAX_USERNAME_LENGTH, 
-  MIN_PASSWORD_LENGTH, 
-  MIN_USERNAME_LENGTH, 
-  USERNAME_REGEXP, 
-  VALIDATION_MESSAGES 
-} from "@/helpers/constants";
+import {
+  EMAIL_REGEXP,
+  MAX_EMAIL_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MAX_USERNAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  MIN_USERNAME_LENGTH,
+  USERNAME_REGEXP,
+  VALIDATION_MESSAGES,
+} from '@/helpers/constants'
 
 export const validationRules = {
   username: {
@@ -49,6 +49,7 @@ export const validationRules = {
   },
   confirmPassword: {
     required: VALIDATION_MESSAGES.confirmPassword.required,
-    validate: (value: string, { password }: { password: string }) => value === password || VALIDATION_MESSAGES.confirmPassword.mismatch,
+    validate: (value: string, { password }: { password: string }) =>
+      value === password || VALIDATION_MESSAGES.confirmPassword.mismatch,
   },
-};
+}

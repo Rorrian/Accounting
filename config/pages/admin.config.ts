@@ -1,5 +1,5 @@
 class AdminPages {
-	HOME = '/admin'
+  HOME = '/admin'
 }
 
 export const ADMIN_PAGES = new AdminPages()

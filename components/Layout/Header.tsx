@@ -1,10 +1,10 @@
-import clsx from "clsx"
-import React from "react"
+import clsx from 'clsx'
+import React from 'react'
 
 interface HeaderProps {
-	className?: string
+  className?: string
 }
 
 export const Header = ({ className }: HeaderProps) => {
-	return <div className={clsx("header", className)}>Header</div>
+  return <div className={clsx('header', className)}>Header</div>
 }

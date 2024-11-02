@@ -1,80 +1,74 @@
 import { axiosClassic } from '@/api/axios'
-import { FormData, User } from '@/types/commonTypes'
 import { AuthTypes } from '@/helpers/constants'
+import { FormData, User } from '@/types/commonTypes'
 
 import { removeFromStorage, saveTokenStorage } from './auth.helper'
 
 interface AuthResponse {
-	accessToken: string
-	isValid?: boolean
-	user: User
+  accessToken: string
+  isValid?: boolean
+  user: User
 }
 
 class AuthService {
-	async main(
-		type: AuthTypes,
-		data: FormData,
-		token?: string | null,
-	) {
-		const response = await axiosClassic.post<AuthResponse>(
-			`/auth/${type}`,
-			data,
-			{
-				headers: {
-					recaptcha: token
-				}
-			}
-		)
+  async main(type: AuthTypes, data: FormData, token?: string | null) {
+    const response = await axiosClassic.post<AuthResponse>(
+      `/auth/${type}`,
+      data,
+      {
+        headers: {
+          recaptcha: token,
+        },
+      },
+    )
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+    if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
-		return response
-	}
+    return response
+  }
 
-	async getNewTokens() {
-		const response = await axiosClassic.post<AuthResponse>(
-			'/auth/access-token'
-		)
+  async getNewTokens() {
+    const response = await axiosClassic.post<AuthResponse>('/auth/access-token')
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+    if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
-		return response
-	}
+    return response
+  }
 
-	async getNewTokensByRefresh(refreshToken: string) {
-		const response = await axiosClassic.post<AuthResponse>(
-			'/auth/access-token',
-			{},
-			{
-				headers: {
-					Cookie: `refreshToken=${refreshToken}`
-				}
-			}
-		)
+  async getNewTokensByRefresh(refreshToken: string) {
+    const response = await axiosClassic.post<AuthResponse>(
+      '/auth/access-token',
+      {},
+      {
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+      },
+    )
 
-		return response.data
-	}
+    return response.data
+  }
 
-	async checkResetToken(token?: string) {
-		const response = await axiosClassic.post<AuthResponse>(
-			'/auth/change-password/checkResetToken',
-			{ token },
-		)
+  async checkResetToken(token?: string) {
+    const response = await axiosClassic.post<AuthResponse>(
+      '/auth/change-password/checkResetToken',
+      { token },
+    )
 
-		if (!response?.data) {
-			throw new Error('Invalid token');
-		}
+    if (!response?.data) {
+      throw new Error('Invalid token')
+    }
 
-		return response.data
-	}
-	
-	async logout() {
-		const response = await axiosClassic.post<boolean>('/auth/logout')
+    return response.data
+  }
 
-		if (response.data) removeFromStorage()
+  async logout() {
+    const response = await axiosClassic.post<boolean>('/auth/logout')
 
-		return response
-	}
+    if (response.data) removeFromStorage()
+
+    return response
+  }
 }
 
 export default new AuthService()

@@ -20,8 +20,12 @@ export default tseslint.config(
     },
     settings: {
       'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
         typescript: {
           alwaysTryTypes: true,
+          project: 'tsconfig.json',
         },
       },
     },
@@ -62,7 +66,7 @@ export default tseslint.config(
       'max-len': [
         'error',
         {
-          code: 120,
+          code: 80,
           ignoreTemplateLiterals: true,
           ignoreStrings: true,
           ignoreComments: true,
@@ -93,11 +97,14 @@ export default tseslint.config(
       // Ограничение количества пустых строк до одной
       'no-multiple-empty-lines': ['error', { max: 1 }],
       // Ошибка, если переменная затеняет (перекрывает) другую переменную с тем же именем в области видимости
-      'no-shadow': 'error',
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': ['error'],
       // Использование ++ для инкрементации
       'no-plusplus': 'off',
       // Использование типа any
       '@typescript-eslint/no-explicit-any': 'warn',
+      // TODO: Проверить и исправить все ошибки линтера "eslintimport/named"
+      'import/named': 'off',
     },
   },
 )

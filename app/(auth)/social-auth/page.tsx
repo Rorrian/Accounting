@@ -1,20 +1,20 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { saveTokenStorage } from '@/services/auth/auth.helper'
 
 export default function SocialAuthPage() {
-	const searchParams = useSearchParams()
-	const router = useRouter()
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
-	useEffect(() => {
-		const accessToken = searchParams.get('accessToken')
-		if (accessToken) saveTokenStorage(accessToken)
+  useEffect(() => {
+    const accessToken = searchParams.get('accessToken')
+    if (accessToken) saveTokenStorage(accessToken)
 
-		router.replace('/')
-	}, [])
+    router.replace('/')
+  }, [])
 
-	return <div>Loading...</div>
+  return <div>Loading...</div>
 }

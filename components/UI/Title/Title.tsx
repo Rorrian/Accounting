@@ -1,31 +1,31 @@
-import clsx from "clsx"
-import React from "react"
+import clsx from 'clsx'
+import React from 'react'
 
-import { titleStyles } from "./Title.css"
+import { titleStyles } from './Title.css'
 
-export type TitleHeadingType = "h1" | "h2" | "h3" | "h4"
+export type TitleHeadingType = 'h1' | 'h2' | 'h3' | 'h4'
 
 interface TitleProps {
-	titleClassName?: string
-	headingType?: TitleHeadingType
-	style?: React.CSSProperties
-	children: string | React.ReactNode
+  titleClassName?: string
+  headingType?: TitleHeadingType
+  style?: React.CSSProperties
+  children: string | React.ReactNode
 }
 
 export const Title = ({
-	children,
-	titleClassName,
-	headingType = "h3",
-	...props
+  children,
+  titleClassName,
+  headingType = 'h3',
+  ...props
 }: TitleProps) => {
-	const TitleComponent = headingType
+  const TitleComponent = headingType
 
-	return (
-		<TitleComponent
-			className={clsx(titleStyles.title({ type: headingType }), titleClassName)}
-			{...props}
-		>
-			{children}
-		</TitleComponent>
-	)
+  return (
+    <TitleComponent
+      className={clsx(titleStyles.title({ type: headingType }), titleClassName)}
+      {...props}
+    >
+      {children}
+    </TitleComponent>
+  )
 }

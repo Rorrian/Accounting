@@ -1,12 +1,11 @@
-
 import type { Metadata } from 'next'
 
 import { Users } from './Users'
 
 export const metadata: Metadata = {
-	title: 'Admin SSR'
+  title: 'Admin SSR',
 }
 
 export default async function AdminPage() {
-	return <Users />
+  return <Users />
 }

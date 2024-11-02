@@ -1,20 +1,19 @@
-import clsx from "clsx";
-import { UseFormRegister } from "react-hook-form";
+import clsx from 'clsx'
+import { UseFormRegister } from 'react-hook-form'
 
-import { registerFormStyles } from "@/modules/AuthForms/RegisterForm/RegisterForm.css";
-import { FieldValidationRule } from "@/types/commonTypes";
+import { registerFormStyles } from '@/modules/AuthForms/RegisterForm/RegisterForm.css'
+import { FieldValidationRule } from '@/types/commonTypes'
 
-import { TextField } from "../TextField/TextField";
-
+import { TextField } from '../TextField/TextField'
 
 interface FormTextFieldProps {
-  errorMessage?: string | null;
-  type: string;
-  placeholder: string;
-  register: UseFormRegister<any>;
-  showPasswordToggle?: boolean;
-  validation: FieldValidationRule;
-  toggleVisibility?: () => void;
+  errorMessage?: string | null
+  placeholder: string
+  register: UseFormRegister<any>
+  showPasswordToggle?: boolean
+  type: string
+  validation: FieldValidationRule
+  toggleVisibility?: () => void
 }
 
 export const FormTextField = ({
@@ -39,11 +38,11 @@ export const FormTextField = ({
       <button
         className={clsx(
           registerFormStyles.passwordBtn,
-          type === "text" && registerFormStyles.showPassword
+          type === 'text' && registerFormStyles.showPassword,
         )}
         type="button"
         onClick={toggleVisibility}
       />
     )}
   </div>
-);
+)

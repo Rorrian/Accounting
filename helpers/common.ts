@@ -3,5 +3,5 @@
  * @param error
  * */
 export function getErrorMessage(error: any): string | null {
-	return error?.message ? String(error.message) : null;
+  return error?.message ? String(error.message) : null
 }

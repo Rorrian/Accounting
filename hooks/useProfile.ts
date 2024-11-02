@@ -7,37 +7,37 @@ import authService from '@/services/auth/auth.service'
 import userService from '@/services/user.service'
 
 export function useProfile() {
-	const { data, isLoading } = useQuery({
-		queryKey: ['profile'],
-		queryFn: () => userService.fetchProfile(),
-		retry: 1,
-		refetchInterval: 1800000 // 30 minutes in milliseconds
-	})
+  const { data, isLoading } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => userService.fetchProfile(),
+    retry: 1,
+    refetchInterval: 1800000, // 30 minutes in milliseconds
+  })
 
-	const { isSuccess, data: dataTokens } = useQuery({
-		queryKey: ['new tokens'],
-		queryFn: () => authService.getNewTokens(),
-		retry: 1,
-		enabled: !data?.data
-	})
+  const { isSuccess, data: dataTokens } = useQuery({
+    queryKey: ['new tokens'],
+    queryFn: () => authService.getNewTokens(),
+    retry: 1,
+    enabled: !data?.data,
+  })
 
-	useEffect(() => {
-		if (!isSuccess) return
+  useEffect(() => {
+    if (!isSuccess) return
 
-		if (dataTokens.data.accessToken)
-			saveTokenStorage(dataTokens.data.accessToken)
-	}, [isSuccess])
+    if (dataTokens.data.accessToken)
+      saveTokenStorage(dataTokens.data.accessToken)
+  }, [isSuccess])
 
-	const profile = data?.data
+  const profile = data?.data
 
-	const userState = profile ? transformUserToState(profile) : null
+  const userState = profile ? transformUserToState(profile) : null
 
-	return {
-		isLoading,
+  return {
+    isLoading,
 
-		user: {
-			...profile,
-			...userState
-		}
-	}
+    user: {
+      ...profile,
+      ...userState,
+    },
+  }
 }

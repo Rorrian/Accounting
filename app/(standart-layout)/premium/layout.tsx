@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from 'react'
 
-import { UserRole } from '@/services/auth/auth.types'
 import { protectPage } from '@/helpers/server/protect-page'
+import { UserRole } from '@/services/auth/auth.types'
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
-	await protectPage(UserRole.PREMIUM)
+  await protectPage(UserRole.PREMIUM)
 
-	return children
+  return children
 }
