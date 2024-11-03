@@ -78,14 +78,14 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
       prevIndex => (prevIndex + newDirection + forms.length) % forms.length,
     )
   }
-  const handleSwipeEnd = (offset: Point, velocity: Point) => {
-    const swipe = calcSwipeForce(offset.x, velocity.x)
-    if (swipe < -MIN_SWIPE_FORCE) {
-      switchForm(DIRECTION_NEXT)
-    } else if (swipe > MIN_SWIPE_FORCE) {
-      switchForm(DIRECTION_PREV)
-    }
-  }
+  // const handleSwipeEnd = (offset: Point, velocity: Point) => {
+  //   const swipe = calcSwipeForce(offset.x, velocity.x)
+  //   if (swipe < -MIN_SWIPE_FORCE) {
+  //     switchForm(DIRECTION_NEXT)
+  //   } else if (swipe > MIN_SWIPE_FORCE) {
+  //     switchForm(DIRECTION_PREV)
+  //   }
+  // }
 
   return (
     <div className={className}>

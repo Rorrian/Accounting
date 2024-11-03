@@ -12,7 +12,7 @@ import { toggleThemeBtnStyles } from './ToggleThemeBtn.css'
 import { Button } from '../UI/Button/Button'
 
 export const ToggleThemeBtn = forwardRef(
-  ({}, ref: LegacyRef<HTMLButtonElement> | undefined) => {
+  (props, ref: LegacyRef<HTMLButtonElement> | undefined) => {
     const [isDarkMode, toggleTheme] = useThemeStore(state => [
       state.isDarkMode,
       state.toggleTheme,

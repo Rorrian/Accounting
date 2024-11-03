@@ -1,4 +1,9 @@
-**/.git
-**/node_modules
-**/package.json
-**/package-lock.json
+.next/
+node_modules/
+.git/
+.vscode/
+package.json
+package-lock.json
+next.config.mjs
+eslint.config.mjs
+README.md

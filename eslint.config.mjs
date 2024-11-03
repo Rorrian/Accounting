@@ -19,6 +19,9 @@ export default tseslint.config(
       prettier: prettierPlugin,
     },
     settings: {
+      react: {
+        version: 'detect',
+      },
       'import/resolver': {
         node: {
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -41,6 +44,18 @@ export default tseslint.config(
         project: ['tsconfig.json', 'tsconfig.node.json'],
       },
     },
+  },
+  {
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      '.git/**',
+      '.vscode/**',
+      'package.json',
+      'package-lock.json',
+      'next.config.mjs',
+      'eslint.config.mjs',
+    ],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],

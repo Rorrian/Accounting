@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/UI/Button/Button'
