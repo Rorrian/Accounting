@@ -17,6 +17,17 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'BudgetBuddy',
   description: 'App for home accounting',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  other: {
+    preloadImages: [
+      '/images/auth/authBg0.webp',
+      '/images/auth/authBg1.webp',
+      '/images/auth/authBg2.webp',
+      '/images/auth/authBg3.webp',
+    ],
+  },
 }
 
 export default async function AuthLayout({
@@ -28,26 +39,16 @@ export default async function AuthLayout({
     return redirect(user.isAdmin ? ADMIN_PAGES.HOME : PUBLIC_PAGES.HOME)
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="preload" href="/images/auth/authBg0.webp" as="image" />
-        <link rel="preload" href="/images/auth/authBg1.webp" as="image" />
-        <link rel="preload" href="/images/auth/authBg2.webp" as="image" />
-        <link rel="preload" href="/images/auth/authBg3.webp" as="image" />
-      </head>
+    <div className={inter.className}>
+      <Providers>
+        <div className={authStyles.wrapper}>
+          <h1 className="hidden">AUTHENTICATION</h1>
 
-      <body className={inter.className}>
-        <Providers>
-          <div className={authStyles.wrapper}>
-            <h1 className="hidden">AUTHENTICATION</h1>
-
-            {/* TODO: Смена картинок при изменении формы*/}
-            <div className={authStyles.imageBox} />
-
-            {children}
-          </div>
-        </Providers>
-      </body>
-    </html>
+          {/* TODO: Смена картинок при изменении формы*/}
+          <div className={authStyles.imageBox} />
+          {children}
+        </div>
+      </Providers>
+    </div>
   )
 }

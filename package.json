@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "devT": "next dev --turbo",
+    "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "nextLint": "next lint",
@@ -23,10 +23,10 @@
     "framer-motion": "^11.3.28",
     "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
-    "next": "14.2.5",
-    "react": "^18",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
     "react-cookie": "^7.2.0",
-    "react-dom": "^18",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
@@ -38,8 +38,8 @@
     "@tanstack/react-query-devtools": "^5.56.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/react-google-recaptcha": "^2.1.9",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
@@ -62,5 +62,9 @@
   },
   "overrides": {
     "eslint": "^9.7.0"
+  },
+  "resolutions": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   }
 }

@@ -8,7 +8,7 @@ import { User } from '@/types/commonTypes'
 const fetchProfile = async () => {
   'use server'
 
-  const cookie = cookies()
+  const cookie = await cookies()
   const accessToken = cookie.get(EnumTokens.ACCESS_TOKEN)?.value
 
   return fetch(`${API_URL}/auth/profile`, {
@@ -17,6 +17,8 @@ const fetchProfile = async () => {
     },
   }).then(res => res.json()) as Promise<User>
 }
+
+// TODO: Проверить обновление токенов
 
 export default async function ProfilePage() {
   const profile = await fetchProfile()

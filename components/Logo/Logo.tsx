@@ -15,6 +15,7 @@ interface LogoProps {
 }
 
 export const Logo = ({ className, size = 'big' }: LogoProps) => {
+  // TODO:  может быть ошибка из-за window
   return (
     <div
       className={clsx(logoStyles.logoContainer({ size }), className)}

@@ -14,8 +14,8 @@ import {
 
 export async function getServerAuth(): Promise<TUserDataState | null> {
   const JWT_SECRET = process.env.JWT_SECRET
-  let accessToken = cookies().get(EnumTokens.ACCESS_TOKEN)?.value
-  const refreshToken = cookies().get(EnumTokens.REFRESH_TOKEN)?.value
+  let accessToken = (await cookies()).get(EnumTokens.ACCESS_TOKEN)?.value
+  const refreshToken = (await cookies()).get(EnumTokens.REFRESH_TOKEN)?.value
 
   if (!refreshToken) return null
 
