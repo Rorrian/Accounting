@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { PropsWithChildren } from 'react'
 
 import Providers from '@/providers/Providers'
 
@@ -12,11 +13,7 @@ export const metadata: Metadata = {
   description: 'App for home accounting',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={inter.className}>

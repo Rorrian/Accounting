@@ -1,9 +1,9 @@
 'use client'
 
-import { AnimatePresence, motion, Point } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useState } from 'react'
 
-import { AuthTypes, MIN_SWIPE_FORCE } from '@/helpers/constants'
+import { AuthTypes, defaultTransition } from '@/helpers/constants'
 
 import { authFormStyles } from './AuthForms.css'
 import { LoginForm } from './LoginForm/LoginForm'
@@ -70,8 +70,9 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
     }),
   }
 
-  const calcSwipeForce = (offset: number, velocity: number) =>
-    Math.abs(offset) * velocity
+  // const calcSwipeForce = (offset: number, velocity: number) =>
+  //   Math.abs(offset) * velocity
+
   const switchForm = (newDirection: number) => {
     setDirection(newDirection)
     setCurrentFormIndex(
@@ -91,14 +92,14 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
     <div className={className}>
       <div className={authFormStyles.formBox}>
         <AnimatePresence initial={false} custom={direction}>
-          <motion.div
+          <m.div
             key={currentForm.type}
             custom={direction}
             variants={variants}
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5 }}
+            transition={defaultTransition}
             // Переключение форм перетаскиванием
             // drag="x"
             // dragConstraints={{ left: 0, right: 0 }}
@@ -109,7 +110,7 @@ export const AuthForms = ({ className }: AuthFormsProps) => {
             className={authFormStyles.formWrapper}
           >
             {currentForm.component}
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </div>
     </div>

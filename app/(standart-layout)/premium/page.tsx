@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import { PremiumContent } from './PremiumContent'
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
+  title: 'Premium',
 }
 
-export default function DashboardPage() {
+export default function PremiumPage() {
   return <PremiumContent />
 }

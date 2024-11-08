@@ -44,3 +44,17 @@ export const marginAuto = style(
   },
   'marginAuto',
 )
+
+export const textAlignCenter = style(
+  {
+    textAlign: 'center',
+  },
+  'textAlignCenter',
+)
+
+export const fullHeight = style(
+  {
+    height: '100%',
+  },
+  'fullHeight',
+)

@@ -18,7 +18,7 @@ const fetchProfile = async () => {
   }).then(res => res.json()) as Promise<User>
 }
 
-// TODO: Проверить обновление токенов
+// TODO: Проверить обновление токенов/увеличить срок жизни токенов
 
 export default async function ProfilePage() {
   const profile = await fetchProfile()

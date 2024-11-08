@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { forwardRef, LegacyRef } from 'react'
+import { m } from 'framer-motion'
+import { forwardRef } from 'react'
 
 import MoonIcon from '@/public/images/icons/moon.svg'
 import SunIcon from '@/public/images/icons/sun.svg'
@@ -12,7 +12,7 @@ import { toggleThemeBtnStyles } from './ToggleThemeBtn.css'
 import { Button } from '../UI/Button/Button'
 
 export const ToggleThemeBtn = forwardRef(
-  (props, ref: LegacyRef<HTMLButtonElement> | undefined) => {
+  (props, ref: React.Ref<HTMLButtonElement> | undefined) => {
     const [isDarkMode, toggleTheme] = useThemeStore(state => [
       state.isDarkMode,
       state.toggleTheme,
@@ -35,4 +35,4 @@ export const ToggleThemeBtn = forwardRef(
 
 ToggleThemeBtn.displayName = 'ToggleThemeBtn'
 
-export const MToggleThemeBtn = motion.create(ToggleThemeBtn)
+export const MToggleThemeBtn = m.create(ToggleThemeBtn)

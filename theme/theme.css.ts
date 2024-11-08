@@ -6,6 +6,8 @@ import {
 
 const root = createGlobalTheme(':root', {
   content: {
+    accent: '#f78838',
+    accent2: '#1414b8',
     darkGrey: '#222222',
     white: '#ffffff',
     lightGrey: '#b3b3b3',

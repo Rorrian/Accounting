@@ -83,7 +83,7 @@ export function useAuthForm<T extends FormData>(type: AuthTypes) {
     onSuccess() {
       startTransition(() => {
         reset()
-        router.push(PUBLIC_PAGES.HOME)
+        router.push(PUBLIC_PAGES.DASHBOARD)
       })
     },
     onError: handleError,
@@ -100,7 +100,7 @@ export function useAuthForm<T extends FormData>(type: AuthTypes) {
     onSuccess() {
       startTransition(() => {
         reset()
-        router.push(PUBLIC_PAGES.HOME)
+        router.push(PUBLIC_PAGES.DASHBOARD)
       })
     },
     onError: handleError,

@@ -23,6 +23,8 @@
     "framer-motion": "^11.3.28",
     "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
+    "lodash.debounce": "^4.0.8",
+    "lucide-react": "^0.454.0",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-cookie": "^7.2.0",
@@ -30,6 +32,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
+    "react-use": "^17.5.1",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

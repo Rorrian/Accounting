@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { forwardRef, LegacyRef, useId } from 'react'
+import React, { forwardRef, useId } from 'react'
 
 import { InputCounter } from '../InputBoxes.types'
 import { FooterInput } from './InputFooter'
@@ -31,7 +31,7 @@ export const TextField = forwardRef(
       value,
       ...props
     }: TextFieldProps,
-    ref: LegacyRef<HTMLInputElement> | undefined,
+    ref: React.Ref<HTMLInputElement> | undefined,
   ) => {
     const id = useId()
 

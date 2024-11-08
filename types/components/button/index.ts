@@ -1,5 +1,5 @@
 import { HTMLMotionProps } from 'framer-motion'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, JSX } from 'react'
 
 import { Justify, Kind, Size } from './enums'
 

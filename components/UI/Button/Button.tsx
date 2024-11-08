@@ -1,8 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
-import { motion } from 'framer-motion'
-import { forwardRef, LegacyRef } from 'react'
+import { m } from 'framer-motion'
+import { forwardRef } from 'react'
 
 import { ButtonProps } from '@/types/components/button'
 import { Justify, Kind, Size } from '@/types/components/button/enums'
@@ -25,9 +25,9 @@ export const Button = forwardRef(
       size = Size.Big,
       ...props
     }: ButtonProps,
-    ref: LegacyRef<HTMLButtonElement> | undefined,
+    ref: React.Ref<HTMLButtonElement> | undefined,
   ) => (
-    <motion.button
+    <m.button
       ref={ref}
       disabled={disabled}
       className={clsx(
@@ -57,10 +57,10 @@ export const Button = forwardRef(
         </span>
       )}
       {children}
-    </motion.button>
+    </m.button>
   ),
 )
 
 Button.displayName = 'Button'
 
-export const MButton = motion.create(Button)
+export const MButton = m.create(Button)

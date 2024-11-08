@@ -23,13 +23,13 @@ const icon = style(
   [
     flexCentered,
     {
-      width: '2rem',
-      height: '2rem',
+      width: '32px',
+      height: '32px',
     },
     responsiveStyle({
       tablet: {
-        width: '1.5rem',
-        height: '1.5rem',
+        width: '24px',
+        height: '24px',
       },
     }),
   ],

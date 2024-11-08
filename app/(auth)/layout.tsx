@@ -30,13 +30,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function AuthLayout({
-  children,
-}: PropsWithChildren<unknown>) {
+export default async function AuthLayout({ children }: PropsWithChildren) {
   const user = await getServerAuth()
 
   if (user?.isLoggedIn)
-    return redirect(user.isAdmin ? ADMIN_PAGES.HOME : PUBLIC_PAGES.HOME)
+    return redirect(user.isAdmin ? ADMIN_PAGES.HOME : PUBLIC_PAGES.DASHBOARD)
 
   return (
     <div className={inter.className}>

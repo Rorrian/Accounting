@@ -1,5 +1,9 @@
 import { shallow } from 'zustand/shallow'
 
+import {
+  SidebarStore,
+  useSidebarStore as useSidebarStoreZus,
+} from './useSidebarStore'
 import { ThemeStore, useThemeStore as useThemeStoreZus } from './useThemeStore'
 
 const useThemeStore = <T>(
@@ -7,4 +11,9 @@ const useThemeStore = <T>(
   equalityFn: (a: T, b: T) => boolean = shallow,
 ): T => useThemeStoreZus(selector, equalityFn)
 
-export { useThemeStore }
+const useSidebarStore = <T>(
+  selector: (state: SidebarStore) => T,
+  equalityFn: (a: T, b: T) => boolean = shallow,
+): T => useSidebarStoreZus(selector, equalityFn)
+
+export { useThemeStore, useSidebarStore }

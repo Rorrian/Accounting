@@ -14,6 +14,7 @@ export const useThemeStore = createStore<ThemeStore>(
       // ФР: по умолчанию светлая тема => сохраненная тема
       // ОР: прелоадер => сохраненная тема
       isDarkMode: false,
+
       toggleTheme: () => {
         const { isDarkMode } = get()
 

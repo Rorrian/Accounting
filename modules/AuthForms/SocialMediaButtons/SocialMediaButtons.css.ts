@@ -6,7 +6,7 @@ const wrapper = style(
   {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '1rem',
+    gap: vars.spaces.md,
   },
   'wrapper',
 )
@@ -21,8 +21,8 @@ const button = style(
 
 const icon = style(
   {
-    width: '1.25rem',
-    height: '1.25rem',
+    width: '20px',
+    height: '20px',
     color: vars.themeVariables.content.primary,
 
     transition: `color ${vars.transition}`,
