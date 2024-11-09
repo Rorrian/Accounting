@@ -6,6 +6,9 @@ export const enum Size {
 export const enum Kind {
   Primary = 'primary',
   Secondary = 'secondary',
+  Tertiary = 'tertiary',
+
+  Accent = 'accent',
 
   Transparent = 'transparent',
 }

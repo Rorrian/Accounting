@@ -30,6 +30,13 @@ export const justifyContentStart = style(
   'justifyContentStart',
 )
 
+export const alignItemsCentered = style(
+  {
+    alignItems: 'center',
+  },
+  'alignItemsCentered',
+)
+
 export const flexCentered = style(
   {
     justifyContent: 'center',

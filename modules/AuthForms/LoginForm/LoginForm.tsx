@@ -91,7 +91,7 @@ export const LoginForm = ({
         <div className={formStyles.middle}>
           <Button
             disabled={isLoading}
-            kind={Kind.Secondary}
+            kind={Kind.Primary}
             title={isLoading ? 'Loading...' : 'Sign in'}
             type="submit"
           />
@@ -102,7 +102,7 @@ export const LoginForm = ({
         <div className={formStyles.bottom}>
           <p className={formStyles.caption}>New to the BudgetBuddy?</p>
           <Button
-            kind={Kind.Secondary}
+            kind={Kind.Accent}
             size={Size.Small}
             title="Sign Up"
             onClick={() => onSignUp()}

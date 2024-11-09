@@ -5,7 +5,9 @@ import { m } from 'framer-motion'
 import { PanelLeftOpen, PanelLeftClose } from 'lucide-react'
 import { useRef, useState } from 'react'
 
-import { defaultTransition } from '@/helpers/constants'
+import { Logo } from '@/components/Logo/Logo'
+import { ToggleThemeBtn } from '@/components/ToggleThemeBtn/ToggleThemeBtn'
+import { defaultTransition, SIDEBAR_WIDTH } from '@/helpers/constants'
 import useIsMobile from '@/hooks/useIsMobile'
 import { useOutsideClickAndEscape } from '@/hooks/useOutsideClickAndEscape'
 import { useSidebarStore } from '@/store'
@@ -28,12 +30,12 @@ export const Sidebar = () => {
   const sidebarRef = useRef(null)
   const sidebarInnerRef = useRef(null)
 
-  const adaptiveSidebarWidth = isMobile ? '100%' : '24%'
+  const adaptiveSidebarWidth = isMobile ? '100%' : '25%'
   const adaptiveToggleButtonLeft = isMobile ? '97%' : '88%'
   // FIXME: магические числа ?
   const buttonStyle = () => {
     return {
-      top: isCollapsed ? 16 : 8,
+      top: isCollapsed ? '5.5%' : '1%',
       left: isCollapsed ? '26%' : adaptiveToggleButtonLeft,
       width: isCollapsed ? 24 : 20,
       height: isCollapsed ? 24 : 20,
@@ -70,10 +72,12 @@ export const Sidebar = () => {
         isCollapsed && sidebarStyles.collapsed,
         isCanHover && sidebarStyles.canHover,
       )}
-      animate={{ width: isCollapsed ? 50 : adaptiveSidebarWidth }}
+      animate={{ width: isCollapsed ? SIDEBAR_WIDTH : adaptiveSidebarWidth }}
       transition={defaultTransition}
     >
-      <div className={fullHeight} ref={sidebarInnerRef}>
+      <div className={sidebarStyles.inner} ref={sidebarInnerRef}>
+        <Logo className={sidebarStyles.logo} isCompact={isCollapsed} />
+
         <m.button
           className={sidebarStyles.toggleButton}
           animate={buttonStyle()}
@@ -95,6 +99,8 @@ export const Sidebar = () => {
           animate={{ marginTop: isCollapsed ? 38 : 0 }}
           transition={defaultTransition}
         />
+
+        <ToggleThemeBtn className={sidebarStyles.themeBtn({ isCollapsed })} />
       </div>
     </m.aside>
   )

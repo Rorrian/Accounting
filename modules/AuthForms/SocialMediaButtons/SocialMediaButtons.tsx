@@ -15,7 +15,7 @@ export function SocialMediaButtons() {
     <div className={socialMediaButtonsStyles.wrapper}>
       <Button
         className={socialMediaButtonsStyles.button}
-        kind={Kind.Secondary}
+        kind={Kind.Tertiary}
         size={Size.Small}
         onClick={() => router.push('/auth/google')}
       >
@@ -24,7 +24,7 @@ export function SocialMediaButtons() {
 
       <Button
         className={socialMediaButtonsStyles.button}
-        kind={Kind.Secondary}
+        kind={Kind.Tertiary}
         size={Size.Small}
         onClick={() => router.push('/auth/github')}
       >

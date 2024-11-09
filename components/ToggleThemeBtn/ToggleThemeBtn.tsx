@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import { m } from 'framer-motion'
 import { forwardRef } from 'react'
 
@@ -11,8 +12,16 @@ import { Kind, Size } from '@/types/components/button/enums'
 import { toggleThemeBtnStyles } from './ToggleThemeBtn.css'
 import { Button } from '../UI/Button/Button'
 
+interface ToggleThemeBtnProps {
+  className?: string
+  iconClassName?: string
+}
+
 export const ToggleThemeBtn = forwardRef(
-  (props, ref: React.Ref<HTMLButtonElement> | undefined) => {
+  (
+    { className, iconClassName }: ToggleThemeBtnProps,
+    ref: React.Ref<HTMLButtonElement> | undefined,
+  ) => {
     const [isDarkMode, toggleTheme] = useThemeStore(state => [
       state.isDarkMode,
       state.toggleTheme,
@@ -22,9 +31,9 @@ export const ToggleThemeBtn = forwardRef(
       <Button
         ref={ref}
         aria-label="Toggle theme"
-        className={toggleThemeBtnStyles.themeBtn}
+        className={clsx(toggleThemeBtnStyles.themeBtn, className)}
         icon={isDarkMode ? <MoonIcon /> : <SunIcon />}
-        iconClassName={toggleThemeBtnStyles.icon}
+        iconClassName={clsx(toggleThemeBtnStyles.icon, iconClassName)}
         kind={Kind.Transparent}
         size={Size.Small}
         onClick={toggleTheme}

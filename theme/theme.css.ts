@@ -8,9 +8,10 @@ const root = createGlobalTheme(':root', {
   content: {
     accent: '#f78838',
     accent2: '#1414b8',
-    darkGrey: '#222222',
+
     white: '#ffffff',
     lightGrey: '#b3b3b3',
+    darkGrey: '#222222',
 
     link: '#f78838',
 
@@ -19,8 +20,6 @@ const root = createGlobalTheme(':root', {
   },
 
   background: {
-    secondary: '#f6f5f4',
-
     disabled: '#efedeb',
     transparent: 'rgba(255, 255, 255, 0.14)',
 
@@ -62,15 +61,25 @@ const root = createGlobalTheme(':root', {
 const themeVariables = createThemeContract({
   content: {
     primary: null,
-    tertiary: null,
+    secondary: null,
   },
 
   background: {
     primary: null,
+    secondary: null,
+    button: {
+      primary: null,
+      secondary: null,
+      tertiary: null,
+      accent: null,
+      transparent: null,
+    },
   },
+
   pageBackground: {
     auth: null,
   },
+
   textShadow: null,
   filter: null,
 })
@@ -78,15 +87,26 @@ const themeVariables = createThemeContract({
 export const lightTheme = createTheme(themeVariables, {
   content: {
     primary: '#222222',
-    tertiary: '#ffffff',
+    secondary: '#ffffff',
   },
 
   background: {
     primary: '#ffffff',
+    secondary: '#f6f5f4',
+
+    button: {
+      primary: '#f78838',
+      secondary: '#f5c7a6',
+      tertiary: '#f6f5f4',
+      accent: '#deaebf',
+      transparent: 'transparent',
+    },
   },
+
   pageBackground: {
     auth: 'url(/images/auth/authBg2.webp)',
   },
+
   textShadow: '1px 1px #fff, 2px 2px #777',
   filter: '',
 })
@@ -94,15 +114,26 @@ export const lightTheme = createTheme(themeVariables, {
 export const darkTheme = createTheme(themeVariables, {
   content: {
     primary: '#ffffff',
-    tertiary: '#222222',
+    secondary: '#222222',
   },
 
   background: {
     primary: '#222222',
+    secondary: '#171717',
+
+    button: {
+      primary: '#e27a2f',
+      secondary: '#363636',
+      tertiary: '#171717',
+      accent: '#692731',
+      transparent: 'transparent',
+    },
   },
+
   pageBackground: {
     auth: 'url(/images/auth/authBg1.webp)',
   },
+
   textShadow: '1px 1px #fff, 2px 2px #222',
   filter: 'invert(1)',
 })

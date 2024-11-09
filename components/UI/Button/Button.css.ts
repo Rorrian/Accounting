@@ -42,19 +42,31 @@ const buttonVariants: ButtonVariantsType = {
   kind: {
     [Kind.Primary]: {
       vars: {
-        [background]: vars.themeVariables.background.primary,
-        [titleColor]: vars.content.white,
+        [background]: vars.themeVariables.background.button.primary,
+        [titleColor]: vars.themeVariables.content.secondary,
       },
     },
     [Kind.Secondary]: {
       vars: {
-        [background]: vars.background.secondary,
-        [titleColor]: vars.content.darkGrey,
+        [background]: vars.themeVariables.background.button.secondary,
+        [titleColor]: vars.themeVariables.content.primary,
+      },
+    },
+    [Kind.Tertiary]: {
+      vars: {
+        [background]: vars.themeVariables.background.button.tertiary,
+        [titleColor]: vars.themeVariables.content.primary,
+      },
+    },
+    [Kind.Accent]: {
+      vars: {
+        [background]: vars.themeVariables.background.button.accent,
+        [titleColor]: vars.themeVariables.content.primary,
       },
     },
     [Kind.Transparent]: {
       vars: {
-        [background]: vars.background.transparent,
+        [background]: vars.themeVariables.background.button.transparent,
         [titleColor]: vars.themeVariables.content.primary,
       },
     },

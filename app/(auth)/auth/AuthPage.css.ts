@@ -11,8 +11,9 @@ const wrapper = style(
 
     height: '100vh',
     backgroundColor: vars.themeVariables.background.primary,
+    color: vars.themeVariables.content.primary,
 
-    transition: `background-color ${vars.transition}`,
+    transition: `background-color ${vars.transition}, color ${vars.transition}`,
   },
   'wrapper',
 )

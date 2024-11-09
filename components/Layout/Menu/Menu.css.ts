@@ -6,7 +6,7 @@ import { vars } from '@/theme/theme.css'
 
 const subMenu = style(
   {
-    padding: '0 20px',
+    padding: `0px ${vars.spaces.lg}`,
     overflow: 'hidden',
   },
   'subMenu',
@@ -19,7 +19,9 @@ const menuItem = recipe(
       alignItems: 'center',
       gap: vars.spaces.sm,
 
-      padding: '14px 20px',
+      color: vars.themeVariables.content.primary,
+
+      padding: `14px ${vars.spaces.lg}`,
       transition: `background-color ${vars.transition}, color ${vars.transition}`,
     },
     variants: {

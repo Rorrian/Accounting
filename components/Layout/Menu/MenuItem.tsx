@@ -44,11 +44,11 @@ export const MenuItem = ({
     setIsDropdownOpen(prev => !prev)
   }, [isCollapsed, toggleSidebar])
 
-  const handleLinkClick = useCallback(() => {
+  const handleLinkClick = () => {
     if (!isCollapsed) {
       toggleSidebar()
     }
-  }, [toggleSidebar])
+  }
 
   return (
     <>

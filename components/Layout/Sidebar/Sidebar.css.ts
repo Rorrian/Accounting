@@ -1,7 +1,14 @@
 import { globalStyle, style } from '@vanilla-extract/css'
+import { recipe } from '@vanilla-extract/recipes'
 
+import { SIDEBAR_WIDTH } from '@/helpers/constants'
 import { responsiveStyle } from '@/helpers/responsive'
-import { flexCentered, flexRow } from '@/styles/shared.css'
+import {
+  flexCentered,
+  flexColumn,
+  flexRow,
+  fullHeight,
+} from '@/styles/shared.css'
 import { vars } from '@/theme/theme.css'
 
 const sidebar = style(
@@ -14,10 +21,10 @@ const sidebar = style(
       // Вариант с "летающим меню"
       position: 'fixed',
       height: '100vh',
-      width: '50px',
+      width: `${SIDEBAR_WIDTH}px`,
       maxWidth: 'max-content',
-      borderRadius: vars.borderRadius.xs,
-      backgroundColor: vars.themeVariables.background.primary,
+      borderRadius: `0px ${vars.borderRadius.xs} ${vars.borderRadius.xs} 0px`,
+      backgroundColor: vars.themeVariables.background.secondary,
       padding: `${vars.spaces.sm} 0`,
       boxShadow:
         '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -33,16 +40,40 @@ const sidebar = style(
   'sidebar',
 )
 
+const inner = style(
+  [
+    flexColumn,
+    fullHeight,
+    {
+      position: 'relative',
+    },
+  ],
+  'inner',
+)
+
+const logo = style(
+  {
+    margin: '0 auto',
+  },
+  'logo',
+)
+
 const toggleButton = style(
   [
     flexRow,
     flexCentered,
     {
       position: 'absolute',
-      top: '16px',
-      left: '26%',
+      top: '5.5%',
+      left: '23%',
+
       width: '24px',
       height: '24px',
+
+      backgroundColor: vars.themeVariables.background.primary,
+      color: vars.themeVariables.content.primary,
+
+      transition: `background-color ${vars.transition}, color ${vars.transition}`,
 
       cursor: 'pointer',
     },
@@ -65,9 +96,34 @@ globalStyle(`${canHover} a:hover`, {
   color: vars.content.accent,
 })
 
+const themeBtn = recipe(
+  {
+    base: {
+      position: 'relative',
+
+      margin: vars.spaces.lg,
+      marginTop: 'auto',
+      background: 'unset',
+    },
+    variants: {
+      isCollapsed: {
+        true: {},
+        false: { marginRight: 'auto' },
+      },
+    },
+    defaultVariants: {
+      isCollapsed: false,
+    },
+  },
+  'themeBtn',
+)
+
 export const sidebarStyles = {
   sidebar,
+  inner,
   toggleButton,
+  logo,
   collapsed,
   canHover,
+  themeBtn,
 }
