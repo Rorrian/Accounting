@@ -7,31 +7,37 @@ import { FieldValidationRule } from '@/types/commonTypes'
 import { TextField } from '../TextField/TextField'
 
 interface FormTextFieldProps {
+  className?: string
+  defaultValue?: string
   errorMessage?: string | null
   placeholder: string
   register: UseFormRegister<any>
   showPasswordToggle?: boolean
-  type: string
-  validation: FieldValidationRule
+  type?: string
+  validation?: FieldValidationRule
   toggleVisibility?: () => void
 }
 
 export const FormTextField = ({
+  className,
+  defaultValue,
   errorMessage,
   placeholder,
   register,
   showPasswordToggle,
-  type,
+  type = 'text',
   validation,
   toggleVisibility,
 }: FormTextFieldProps) => (
-  <div className={registerFormStyles.passwordWrapper}>
+  <>
     <TextField
+      className={className}
+      defaultValue={defaultValue}
       errorMessage={errorMessage}
       isValid={!errorMessage}
       placeholder={placeholder}
       type={type}
-      {...register(validation.name, validation.rules)}
+      {...register(validation?.name, validation?.rules)}
     />
 
     {showPasswordToggle && (
@@ -44,5 +50,5 @@ export const FormTextField = ({
         onClick={toggleVisibility}
       />
     )}
-  </div>
+  </>
 )

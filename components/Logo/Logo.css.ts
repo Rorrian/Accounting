@@ -16,8 +16,8 @@ const logoContainer = recipe<LogoVariantsType>(
     },
     variants: {
       size: {
-        big: { maxWidth: '20vw' },
-        small: { maxWidth: '10vw' },
+        big: { maxWidth: '10vw' },
+        small: { maxWidth: '5vw' },
       },
     },
     defaultVariants: {

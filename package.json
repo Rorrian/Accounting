@@ -41,6 +41,7 @@
     "@tanstack/react-query-devtools": "^5.56.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/react-google-recaptcha": "^2.1.9",

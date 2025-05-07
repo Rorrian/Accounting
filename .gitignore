@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-todo.md
 .yarn/install-state.gz
 
 # testing
@@ -36,3 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.codegpt
+.qodo

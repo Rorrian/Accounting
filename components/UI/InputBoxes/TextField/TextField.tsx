@@ -9,6 +9,7 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   caption?: string
   className?: string
   counter?: InputCounter
+  defaultValue?: string
   errorMessage?: string | null
   isValid?: boolean
   label?: string | React.ReactNode
@@ -23,6 +24,7 @@ export const TextField = forwardRef(
       caption,
       className,
       counter,
+      defaultValue,
       errorMessage,
       isValid,
       label,
@@ -49,6 +51,7 @@ export const TextField = forwardRef(
             !isValid && value && inputStyles.invalidInput,
             className,
           )}
+          defaultValue={defaultValue}
           id={id}
           placeholder={placeholder}
           type={type}

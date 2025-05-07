@@ -9,7 +9,6 @@ import CompactLogoSvg from '@/public/images/auth/icons/logoMini.svg'
 import { logoStyles } from './Logo.css'
 
 export type Size = 'big' | 'small'
-// | 'micro'
 
 interface LogoProps {
   className?: string

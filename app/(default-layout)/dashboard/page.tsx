@@ -15,9 +15,7 @@ export default async function DashboardPage() {
   return (
     <div>
       <h1 className={textAlignCenter}>Dashboard</h1>
-      <p>(only for loggedIn user)</p>
-      <br />
-      <p>Для проверки прав, есть страница: /admin</p>
+      <p className={textAlignCenter}>(only for loggedIn user)</p>
       <br />
       <br />
 
