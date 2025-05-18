@@ -5,6 +5,4 @@ export const metadata: Metadata = {
   description: 'Frequencies...',
 }
 
-export default async function FrequenciesPage() {
-  return <div>Frequencies</div>
-}
+export { FrequenciesPage as default } from '@pages/user-financial-data/frequencies/FrequenciesPage'

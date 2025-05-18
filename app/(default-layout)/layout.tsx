@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
 
-import { Header } from '@/components/Layout/Header/Header'
-import { Sidebar } from '@/components/Layout/Sidebar/Sidebar'
-
-import '../../styles/index.scss'
+import '@shared/styles/index.scss'
+import { Header } from '@widgets/Header/Header'
+import { Sidebar } from '@widgets/Sidebar/Sidebar'
 
 import { defaultLayoutStyles } from './Layout.css'
 

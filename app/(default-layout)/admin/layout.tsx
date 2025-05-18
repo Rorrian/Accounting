@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 
-import { protectPage } from '@/helpers/server/protect-page'
-import { UserRole } from '@/services/auth/auth.types'
+import { UserRole } from '@entities/user'
+import { protectPage } from '@features/auth'
 
 export default async function AdminLayout({ children }: PropsWithChildren) {
   await protectPage(UserRole.ADMIN)

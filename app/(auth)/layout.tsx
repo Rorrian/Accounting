@@ -2,11 +2,8 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
-import { ADMIN_PAGES } from '@/config/pages/admin.config'
-import { PUBLIC_PAGES } from '@/config/pages/public.config'
-import { getServerAuth } from '@/helpers/server/get-server-auth'
-
-import { authStyles } from './auth/AuthPage.css'
+import { ADMIN_PAGES, getServerAuth, PUBLIC_PAGES } from '@features/auth'
+import { authStyles } from '@pages/auth/AuthPage.css'
 
 export const metadata: Metadata = {
   title: 'BudgetBuddy',

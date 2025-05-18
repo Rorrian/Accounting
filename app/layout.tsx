@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 
-import Providers from '@/providers/Providers'
-
-import '../styles/index.scss'
+import Providers from '@app/providers/Providers'
+import '@shared/styles/index.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 

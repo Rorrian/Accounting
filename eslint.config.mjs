@@ -92,13 +92,47 @@ export default tseslint.config(
       'import/order': [
         'error',
         {
-          groups: ['builtin', 'external', 'internal'],
-          pathGroupsExcludedImportTypes: ['react'],
+					groups: [
+						['builtin', 'external'],    // Встроенные модули (например, 'next') и Внешние зависимости (например, 'next/font/google')
+						['internal'],   // Внутренние пути с алиасами (например, '@app/*')
+						['parent', 'sibling', 'index', 'object', 'type'],     // Родительские директории (../), Файлы в той же директории (./) и Индексные файлы (./index)
+						// ['sibling'],    // Файлы в той же директории (./)
+						// ['index'],      // Индексные файлы (./index)
+						// ['object'],     // Импорты типов (import type)
+						// ['type']        // Типы (например, PropsWithChildren)
+					],
+					pathGroups: [
+						{
+							pattern: 'next',
+							group: 'builtin',
+						},
+						{
+							pattern: 'react',
+							group: 'builtin',
+						},
+						{
+							pattern: '@app/**, @entities/**, @features/**, @pages/**, @shared/**, @widgets/**',
+							group: 'internal',
+							position: 'after'
+						},
+						{
+							pattern: '../**',
+							group: 'parent',
+							position: 'after'
+						},
+						{
+							pattern: './**',
+							group: 'sibling',
+							position: 'after'
+						}
+					],
+					pathGroupsExcludedImportTypes: ['react'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
             caseInsensitive: true,
           },
+					warnOnUnassignedImports: true
         },
       ],
       // Запрещает вложенные тернарные операторы

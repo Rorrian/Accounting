@@ -5,6 +5,4 @@ export const metadata: Metadata = {
   description: 'Plans...',
 }
 
-export default async function PlansPage() {
-  return <div>List of plans</div>
-}
+export { PlansPage as default } from '@pages/plans/PlansPage'

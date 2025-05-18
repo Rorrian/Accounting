@@ -1,8 +1,8 @@
 import { style } from '@vanilla-extract/css'
 
-import { SIDEBAR_WIDTH } from '@/helpers/constants'
-import { flexColumn, flexRow } from '@/styles/shared.css'
-import { vars } from '@/theme/theme.css'
+import { flexColumn, flexRow } from '@shared/styles/shared.css'
+import { vars } from '@shared/theme/theme.css'
+import { SIDEBAR_WIDTH } from '@shared/utils/constants'
 
 const main = style(
   [

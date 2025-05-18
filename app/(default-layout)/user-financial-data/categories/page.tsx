@@ -5,6 +5,4 @@ export const metadata: Metadata = {
   description: 'Categories...',
 }
 
-export default async function CategoriesPage() {
-  return <div>Categories</div>
-}
+export { CategoriesPage as default } from '@pages/user-financial-data/categories/CategoriesPage'

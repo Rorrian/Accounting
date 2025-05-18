@@ -19,6 +19,12 @@
       }
     ],
     "paths": {
+      "@app/*": ["src/app/*"],
+      "@entities/*": ["src/entities/*"],
+      "@features/*": ["src/features/*"],
+      "@pages/*": ["src/pages/*"],
+      "@shared/*": ["src/shared/*"],
+      "@widgets/*": ["src/widgets/*"],
       "@/*": ["./*"]
     },
     "target": "ES2017"
@@ -29,7 +35,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(auth)/auth/test.js",
-    "types/*.d.ts"
+    "src/app/types/types/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
